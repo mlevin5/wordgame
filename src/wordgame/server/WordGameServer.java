@@ -6,7 +6,7 @@ import java.util.*;
 import wordgame.Sentence;
 
 /**
- * Multiplayer Minesweeper server.
+ * Word Game server.
  */
 public class WordGameServer {
 
