@@ -15,45 +15,39 @@ public class WordGameServer {
 
     // Abstraction function:
     //  represents a server at a specified port with a different 
-    //  thread for each client with a minesweeper board represented by 
-    //  the Board class
+    //  thread for each client with a word game represented by 
+    //  the Sentence class
     
     // Rep Invariant
-    //  board is a valid minesweeper board
+    //  sentence is a valid word game sentence
     //  serverSocket should always be open
     
     // Safety from rep exposure
     //  all fields are private
     //  all fields but players is final
-    //  all fields are contained within the minesweeper server class
+    //  all fields are contained within the WordGameServer class
     //  no references to private fields are returned
-    // 
+
     // System thread safety argument
-    //   - all fields are thread-safe: serverSocket uses confinement, debug is primitive,
-    //     final, and immutable, board was made as a thread-safe data type and also uses
-    //     confinement, and players uses confinement as well as synchronized locks when being modified.
+    //   - all fields are thread-safe: serverSocket uses confinement, 
+    //     sentence was made as a thread-safe data type and also uses
+    //     confinement, and players uses confinement as well as 
+    //     synchronized locks when being modified.
     //   -all public methods are synchronized
     //   -all lists are synchronized lists
     //   -private methods use confinement
 
     /** Default server port. */
     private static final int DEFAULT_PORT = 4444;
-    /** Maximum port number as defined by ServerSocket. */
-    private static final int MAXIMUM_PORT = 65535;
-    /** Default square board size. */
-    private static final int DEFAULT_SIZE = 10;
-
     /** Socket for receiving incoming connections. */
     private final ServerSocket serverSocket;
-    /** Representation of the Minesweeper Board. */
+    /** Representation of the word game sentence. */
     private final Sentence sentence;
-    /** Number of threads, or current players in the minesweeper game. */
+    /** Number of threads or current players in the word game. */
     private Integer players;
-    
-    // TODO: Abstraction function, rep invariant, rep exposure
 
     /**
-     * Make a MinesweeperServer that listens for connections on port.
+     * Make a WordGameServer that listens for connections on port.
      * 
      * @param port port number, requires 0 <= port <= 65535
      * @param debug debug mode flag
@@ -66,7 +60,7 @@ public class WordGameServer {
         checkRep();
     }
     /**
-     * Checks the rep invariant for minesweeper server
+     * Checks the representation invariant for WordGameServer
      */
     private void checkRep(){
         assert !serverSocket.isClosed();
@@ -74,10 +68,11 @@ public class WordGameServer {
 
     /**
      * Run the server, listening for client connections and handling them.
-     * Never returns unless an exception is thrown.
+     * Never returns unless an exception is thrown. Capability for multiple clients
+     * is here, but given the format of the actual game, not necessary
      * 
      * @throws IOException if the main server socket is broken
-     *                     (IOExceptions from individual clients do *not* terminate serve())
+     * (IOExceptions from individual clients do *not* terminate serve())
      */
     public void serve() throws IOException {     
         while (true) {
@@ -138,10 +133,6 @@ public class WordGameServer {
                     in.close();
                 } else{
                     out.println(output);
-               //     if(output.equals("submit")){
-                //        out.close();
-                 //       in.close();
-               //     }
                 }
             }
         } finally {
@@ -160,7 +151,7 @@ public class WordGameServer {
      * 
      * @param input message from client
      * @return message to client, or null if none
-     * @throws IOException 
+     * @throws IOException if the write-to file in sentence object is not found
      */
     private String handleRequest(String input) throws IOException {
         String regex = "(back)|(help)|(bye)|(submit)|(guess [a-zA-Z]+)|(user [a-zA-Z]+)";
@@ -212,50 +203,9 @@ public class WordGameServer {
     }
 
     /**
-     * Start a MinesweeperServer using the given arguments.
-     * 
-     * <br> Usage:
-     *      MinesweeperServer [--debug | --no-debug] [--port PORT] [--size SIZE_X,SIZE_Y | --file FILE]
-     * 
-     * <br> The --debug argument means the server should run in debug mode. The server should disconnect a
-     *      client after a BOOM message if and only if the --debug flag was NOT given.
-     *      Using --no-debug is the same as using no flag at all.
-     * <br> E.g. "MinesweeperServer --debug" starts the server in debug mode.
-     * 
-     * <br> PORT is an optional integer in the range 0 to 65535 inclusive, specifying the port the server
-     *      should be listening on for incoming connections.
-     * <br> E.g. "MinesweeperServer --port 1234" starts the server listening on port 1234.
-     * 
-     * <br> SIZE_X and SIZE_Y are optional positive integer arguments, specifying that a random board of size
-     *      SIZE_X*SIZE_Y should be generated.
-     * <br> E.g. "MinesweeperServer --size 42,58" starts the server initialized with a random board of size
-     *      42*58.
-     * 
-     * <br> FILE is an optional argument specifying a file pathname where a board has been stored. If this
-     *      argument is given, the stored board should be loaded as the starting board.
-     * <br> E.g. "MinesweeperServer --file boardfile.txt" starts the server initialized with the board stored
-     *      in boardfile.txt.
-     * 
-     * <br> The board file format, for use with the "--file" option, is specified by the following grammar:
-     * <pre>
-     *   FILE ::= BOARD LINE+
-     *   BOARD ::= X SPACE Y NEWLINE
-     *   LINE ::= (VAL SPACE)* VAL NEWLINE
-     *   VAL ::= 0 | 1
-     *   X ::= INT
-     *   Y ::= INT
-     *   SPACE ::= " "
-     *   NEWLINE ::= "\n" | "\r" "\n"?
-     *   INT ::= [0-9]+
-     * </pre>
-     * 
-     * <br> If neither --file nor --size is given, generate a random board of size 10x10.
-     * 
-     * <br> Note that --file and --size may not be specified simultaneously.
-     * 
-     * @param args arguments as described
+     * Start a WordGameServer using the given arguments.
+     * @param args arguments (for now there are none)
      */
-    //18.189.126.174
     public static void main(String[] args) {
         int port = DEFAULT_PORT;
         try {
@@ -266,12 +216,12 @@ public class WordGameServer {
     }
 
     /**
-     * Start a MinesweeperServer running on the specified port, with either a random new board or a
+     * Start a WordGame running on the specified port, with a random phrase from the ones provided.
      * @param port The network port on which the server should listen, requires 0 <= port <= 65535.
      * @throws IOException if a network error occurs
      */
     public static void runWordGameServer(int port) throws IOException {
-        List<String> s = new ArrayList<String>();
+        List<String> s = Collections.synchronizedList(new ArrayList<String>());
         s.add("breath of fresh air");
         s.add("break a leg");
         s.add("eat my words");

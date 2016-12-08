@@ -18,7 +18,7 @@ import java.util.Set;
  */
 public class Sentence {
     
-    private static final int LETTERS = 9;
+    private static final int NUM_AV_LETTERS = 9;
     
 
     private final List<List<String>> displaySentence = Collections.synchronizedList(new ArrayList<List<String>>());
@@ -33,8 +33,9 @@ public class Sentence {
     // Safety from rep exposure
 
     // Thread safety
-    //   - all fields are thread-safe: displayCells and hiddenCells are synchronized lists, 
-    //     and row and column are primitive, final, and immutable.
+    //   - all fields are thread-safe: displaySentence and hiddenSentence are 
+    //     synchronized lists, availableLetters is a synchronized set, and 
+    //     writer is a thread-safe data type.
     //   -all public methods are synchronized
     //   -all lists are synchronized lists
     //   -private methods use confinement
@@ -43,24 +44,36 @@ public class Sentence {
      * Check the rep invariant of the Board class.
      */
     private void checkRep(){
-       // assert !this.displaySentence.isEmpty();
-        //assert !this.hiddenSentence.isEmpty();
+        assert !this.displaySentence.isEmpty();
+        assert !this.hiddenSentence.isEmpty();
+        assert !this.availableLetters.isEmpty();
         // other things to do later
     }
+    /**
+     * Generate a random capital letter 
+     * @return a random capital letter [A-Z] 
+     */
     private String randomLetter(){
         Random r = new Random();
         String randLetter = Character.toString((char) (r.nextInt(26) + 'a')).toUpperCase();
         return randLetter;
     }
-
+    /**
+     * Updates the set of Available letters so that there are only ever
+     * NUM_AV_LETTERS (global variable for the number of letters that should
+     * be in the availableLetters set) letters in the set. Also, makes sure that
+     * all the letters needed for the word the user is currently trying to guess
+     * are in the availableLetters set. All the other letters are letters from the next
+     * word(s) or otherwise random. 
+     */
     private void fixAvailableLetters(){
-        while(availableLetters.size() < LETTERS){
+        while(availableLetters.size() < NUM_AV_LETTERS){
             String randLetter1 = randomLetter();
             if(!availableLetters.contains(randLetter1)){
                 availableLetters.add(randLetter1);
             }
         }
-        while(availableLetters.size() > LETTERS){
+        while(availableLetters.size() > NUM_AV_LETTERS){
             String randLetter2 = randomLetter();
             if(!hiddenSentence.get(wordToGuess()-1).contains(randLetter2) && availableLetters.contains(randLetter2)){
                 availableLetters.remove(randLetter2);
@@ -80,12 +93,15 @@ public class Sentence {
  
  
     /**
-     * Constructor for Board that makes a minesweeper board with bombs placed
-     * randomly. The size is determined by inputs.
-     * @param numColumns - the number of columns in the board
-     * @param numRows - the number of rows in the board
-     * @return a Board object representing a minesweeper board
-     * @throws IOException 
+     * Constructor for Sentence that parses the input sentence into 
+     * a list of words, where each word is a list of letters (hiddenSentence),
+     * makes a display version of hiddenSentence, where each letter is
+     * replaced by an underscore (displaySentence), initialize the available
+     * letters for the user to use to guess the first word in the sentence (availableLetters)
+     * and initializes the file writer (writer). 
+     * @param sentence - the input phrase or idiom that the user must guess
+     * @param filename - the name of the file to store the user's action data in
+     * @throws IOException if there is a problem writing to the file
      */
     public Sentence(String sentence, String filename) throws IOException{
         this.writer = new BufferedWriter(new FileWriter(filename, true));
@@ -109,6 +125,18 @@ public class Sentence {
         checkRep();
     }
   
+    /**
+     * Guesses the input word in the next empty spot in the phrase.
+     * @param word the word that the user is guessing 
+     * @return a string describing different events that can happen. 
+     * "wrong size" meant that the input word did not fit in the next 
+     * empty spot in the phrase. the display sentence is not changed.
+     * "invalid letters" means the user tried to use a letter not in the 
+     * available letters set. the display sentence is not changed.
+     * "good" means that the input word was valid and the display sentence
+     * was changed to reflect the user's guess.
+     * @throws IOException
+     */
     public synchronized String guessWord(String word) throws IOException {
 
         int indexWord = wordToGuess() - 1;
@@ -118,7 +146,6 @@ public class Sentence {
             writer.write(System.currentTimeMillis()+"\nguessed: "+word+"\nwrong size error\n\n");
             return "wrong size";
         }
-        // if any letters in word not in available letters
         for(String letter : wordAsList){
             if(!availableLetters.contains(letter)){
                 writer.write(System.currentTimeMillis()+"\nguessed: "+word+"\ninvalid letters error\n\n");
@@ -161,10 +188,7 @@ public class Sentence {
         writer.write(System.currentTimeMillis()+"\n"+"back"+toString()+"\n");
         checkRep();
     }
-    public synchronized int length() {
-        checkRep();
-        return displaySentence.size();
-    }
+
     public synchronized void startGame(String user) throws IOException {
         checkRep();
         writer.write(System.currentTimeMillis()+"\n"+"user "+user+" started"+toString()+"\n");
@@ -173,7 +197,6 @@ public class Sentence {
         checkRep();
         writer.close();
     }
-
     public synchronized int curWordLen() {
         checkRep();
         return hiddenSentence.get(wordToGuess()-1).size();
@@ -191,14 +214,9 @@ public class Sentence {
     }
 
     /**
-     * Prints the blank sentence to string
-     * @return a string representation 
+     * Prints the display sentence and available letters to string
+     * @return a string representation of the word game
      */
-    public String toMyString() {
-        return displaySentence.toString()+"\n"
-                +hiddenSentence.toString()+"\n"
-                +availableLetters.toString()+"\n";
-    }
     @Override public String toString(){
         String s = "\n";
         for(int i =0; i<displaySentence.size(); i++){
