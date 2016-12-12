@@ -24,7 +24,6 @@ public class NewJFrame extends javax.swing.JFrame {
     
     private final Sentence sentence;
     private final List<javax.swing.JButton> buttons = Collections.synchronizedList(new ArrayList<javax.swing.JButton>());
-    private final javax.swing.JPanel panel;
     /**
      * Creates new form NewJFrame
      */
@@ -50,7 +49,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
 
         jPanel1 = new javax.swing.JPanel();
-        panel = jPanel1;
+
         buttons.add(jButton1);
         buttons.add(jButton2);
         buttons.add(jButton3);
@@ -91,12 +90,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Word Game");
