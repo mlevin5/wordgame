@@ -18,7 +18,7 @@ public class Sentence {
 
     private final List<List<String>> displaySentence = Collections.synchronizedList(new ArrayList<List<String>>());
     private final List<List<String>> hiddenSentence = Collections.synchronizedList(new ArrayList<List<String>>());
-    private final Set<String> availableLetters = Collections.synchronizedSet(new HashSet<String>());
+    private final List<List<String>> availableLetters = Collections.synchronizedList(new ArrayList<List<String>>());
     private final BufferedWriter writer;
 
     // Abstraction function
@@ -61,44 +61,21 @@ public class Sentence {
      * are in the availableLetters set. All the other letters are letters from the next
      * word(s) or otherwise random. 
      */
-    private void fixAvailableLetters(){
-        while(availableLetters.size() < NUM_AV_LETTERS){
-            String randLetter1 = randomLetter();
-            if(!availableLetters.contains(randLetter1)){
-                availableLetters.add(randLetter1);
+    private void initializeAvailableLetters(){
+        for(int i=0; i<hiddenSentence.size(); i++){
+            List<String> lettersForWord = new ArrayList<String>();
+            for(int j=0; j<hiddenSentence.get(i).size(); j++){
+                lettersForWord.add(hiddenSentence.get(i).get(j));
             }
-        }
-        while(availableLetters.size() > NUM_AV_LETTERS){
-            String randLetter2 = randomLetter();
-            if(!hiddenSentence.get(wordToGuess()-1).contains(randLetter2) && availableLetters.contains(randLetter2)){
-                availableLetters.remove(randLetter2);
+            while (lettersForWord.size() < NUM_AV_LETTERS){
+                lettersForWord.add(randomLetter());
             }
-        }
-        List<String> wordToCheck = hiddenSentence.get(wordToGuess()-1);
-        for(String letter : wordToCheck){
-            while(!availableLetters.contains(letter)){
-                String randLetter3 = randomLetter();
-                if(availableLetters.contains(randLetter3) && !wordToCheck.contains(randLetter3)){
-                    availableLetters.remove(randLetter3);
-                    availableLetters.add(letter);
-                }
-            }
+            Collections.shuffle(lettersForWord);
+            availableLetters.add(lettersForWord);
+            
         }
     }
-    private void nextWord(){
-        int indexLastWord = wordToGuess() - 2;
-        List<String> wordAsList = hiddenSentence.get(indexLastWord);
-        for(int i=0; i<wordAsList.size(); i++){
-            availableLetters.remove(wordAsList.get(i));
-        }
-        if(indexLastWord+1 != hiddenSentence.size()){
-            for(int j=0; j< hiddenSentence.get(indexLastWord+1).size(); j++){
-                availableLetters.add(hiddenSentence.get(indexLastWord+1).get(j));
-            }
-        }
-        fixAvailableLetters();
 
-    }
     /**
      * Constructor for Sentence that parses the input sentence into 
      * a list of words, where each word is a list of letters (hiddenSentence),
@@ -120,15 +97,12 @@ public class Sentence {
             List<String> displayWordAsList = new ArrayList<String>();
             for(int j=0; j< wordAsList.size(); j++){
                 String letter = wordAsList.get(j);
-                if(!this.availableLetters.contains(letter)){
-                    this.availableLetters.add(letter);
-                }
                 displayWordAsList.add("_");
                
             }
             this.displaySentence.add(displayWordAsList);    
         }
-        fixAvailableLetters();
+        initializeAvailableLetters();
         checkRep();
     }
   
@@ -158,23 +132,16 @@ public class Sentence {
             return "wrong size";
         }
         for(String letter : wordAsList){
-            if(!availableLetters.contains(letter)){
+            if(!getAvailableLetters().contains(letter)){
                 writer.write(System.currentTimeMillis()+"\nguessed: "+word+"\ninvalid letters error\n\n");
                 return "invalid letters";
             }
         }
         for(int i=0; i<wordAsList.size(); i++){
             displaySentence.get(indexWord).set(i,wordAsList.get(i));
-            availableLetters.remove(wordAsList.get(i));
         }
-        if(indexWord+1 != hiddenSentence.size()){
-            for(int j=0; j< hiddenSentence.get(indexWord+1).size(); j++){
-                availableLetters.add(hiddenSentence.get(indexWord+1).get(j));
-            }
-        }
-        if (wordToGuess() != displaySentence.size()+1){
-            fixAvailableLetters();
-        }
+
+
         checkRep();
         writer.write(System.currentTimeMillis()+"\nguessed: "+word+toString()+"\n");
         return "good";
@@ -184,18 +151,19 @@ public class Sentence {
 
         int indexWord = wordToGuess() - 1;
         int indexLetter = letterToGuess() -1;
+        System.out.println(letter + indexWord + displaySentence.size());
         letter = letter.toUpperCase();
         if(indexWord==displaySentence.size()){
             writer.write(System.currentTimeMillis()+"\nguessed: "+letter+"\ninvalid letter error\n\n");
             return "no more blanks";
         }
-        if(!availableLetters.contains(letter)){
+        if(!getAvailableLetters().contains(letter)){
             writer.write(System.currentTimeMillis()+"\nguessed: "+letter+"\ninvalid letter error\n\n");
             return "invalid letter";
         }
+        System.out.println(displaySentence);
         displaySentence.get(indexWord).set(indexLetter, letter);
         if(letterToGuess() == 1){
-            nextWord();
             return "next word";
         }
         checkRep();
@@ -230,7 +198,6 @@ public class Sentence {
         for(int i=0;i<prevWord.size();i++){
             prevWord.set(i, "_");
         }
-        fixAvailableLetters();
         writer.write(System.currentTimeMillis()+"\n"+"back"+toString()+"\n");
         checkRep();
     }
@@ -241,7 +208,6 @@ public class Sentence {
         else if(letterToGuess() == 1 | letterToGuess() == 0){
             List<String> prevWord = displaySentence.get(wordToGuess()-2);
             prevWord.set(prevWord.size()-1, "_");
-            fixAvailableLetters();
             writer.write(System.currentTimeMillis()+"\n"+"back"+toString()+"\n");
         }
         // if going back in the middle of a word
@@ -275,8 +241,8 @@ public class Sentence {
         }
         return win;
     }
-    public synchronized Set<String> getAvailableLetters(){
-        return new HashSet<String>(availableLetters);
+    public synchronized List<String> getAvailableLetters(){
+        return new ArrayList<String>(availableLetters.get(wordToGuess()-1));
     }
 
     public synchronized String toStringGUI(){
@@ -336,7 +302,7 @@ public class Sentence {
         
         if(wordToGuess() != displaySentence.size() +1){
             s+="\n"+"Available Letters: ";
-            for(String letter : availableLetters){
+            for(String letter : getAvailableLetters()){
                 s+= letter+" ";
             }
         } else{

@@ -117,8 +117,6 @@ public class GlitterGUI extends javax.swing.JFrame {
         WordGameTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         WordGameTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wordgame/gifs/cooltext221030335880902.gif"))); // NOI18N
 
-        insertText.setText("jLabel2");
-
         backButton.setText("<html>b<br>a<br>c<br>k</html>");
 
         submitButton.setText("<html>s<br>u<br>m<br>b<br>i<br>t</html>");
@@ -233,6 +231,49 @@ public class GlitterGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // generalize to all buttons
+    private void buttonActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_jButton5ActionPerformed
+        // add letter to blank phrase
+        String letter = ((AbstractButton) evt.getSource()).getText();
+        String indic = sentence.guessLetter(letter); //index error here on last letter ?
+       // update word game display
+       insertText.setText(sentence.toStringGUI());
+       
+       if(indic.equals("next word")){
+           // change all available letter buttons to new available letters
+           Set<String> availableLetters = sentence.getAvailableLetters();
+           int i = 0;
+           for(String newLetter : availableLetters){
+               buttons.get(i).setText(newLetter);
+               i++;
+           }
+           
+       }
+    }//GEN-LAST:event_jButton5ActionPerformed
+// BACK button
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_jButton11ActionPerformed
+        // do i want to go back a word or back a letter?
+        sentence.goBackALetter(); 
+        insertText.setText(sentence.toStringGUI());
+        Set<String> availableLetters = sentence.getAvailableLetters();
+           int i = 0;
+           for(String newLetter : availableLetters){
+               buttons.get(i).setText(newLetter);
+               i++;
+           }
+        
+    }//GEN-LAST:event_jButton11ActionPerformed
+// SUBMIT button
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_jButton12ActionPerformed
+        // either you win! or you lose!
+        if(sentence.win()){
+            insertText.setText("<html><center>YOU<br>WIN!</html>");
+        }else{
+            insertText.setText("<html><center>YOU<br>LOSE!<br>hit back<br>to try<br>again</html>");
+        }
+        
+    }//GEN-LAST:event_jButton12ActionPerformed
+    
     /**
      * @param args the command line arguments
      */
