@@ -221,14 +221,14 @@ public class WordGameServer {
      * Start a WordGameServer using the given arguments.
      * @param args arguments (for now there are none)
      */
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         int port = DEFAULT_PORT;
         try {
             runWordGameServer(port);
         } catch (IOException ioe) {
             throw new RuntimeException(ioe);
         }
-    }
+    }*/
 
     /**
      * Start a WordGame running on the specified port, with a random phrase from the ones provided.

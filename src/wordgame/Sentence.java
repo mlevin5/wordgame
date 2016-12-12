@@ -289,6 +289,18 @@ public class Sentence {
         }
         return s+"</html>";
     }
+    
+    public synchronized String toStringGlitterGUI(){
+        String s = "<html><center>";
+        for(List<String> word : displaySentence){
+            for(String letter : word){
+                s+= letter+" ";
+            }
+            s+="<br>";
+        }
+        return s+"</html>";
+    }
+    
     /**
      * Prints the display sentence and available letters to string
      * @return a string representation of the word game
