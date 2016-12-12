@@ -47,7 +47,12 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-
+        jLabel2 = new javax.swing.JLabel();
+        
+        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText(sentence.toStringGUI());
+        
         jPanel1 = new javax.swing.JPanel();
 
         buttons.add(jButton1);
@@ -87,17 +92,12 @@ public class NewJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
 
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Word Game");
-
-        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Word Game!");
 
         jButton11.setText("Back");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -208,7 +208,7 @@ public class NewJFrame extends javax.swing.JFrame {
 // BACK button
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_jButton11ActionPerformed
         // do i want to go back a word or back a letter?
-        sentence.goBackAWord(); 
+        sentence.goBackALetter(); 
         jLabel2.setText(sentence.toStringGUI());
         Set<String> availableLetters = sentence.getAvailableLetters();
            int i = 0;

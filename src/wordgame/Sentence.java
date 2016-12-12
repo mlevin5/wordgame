@@ -11,11 +11,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-/**
- * A mutable data type representing a Minesweeper board.
- * Boards can be constructed with the hidden bombs in random locations
- * or from a text file of a specified format. 
- */
 public class Sentence {
     
     private static final int NUM_AV_LETTERS = 6;
@@ -41,7 +36,7 @@ public class Sentence {
     //   -private methods use confinement
     
     /**
-     * Check the rep invariant of the Board class.
+     * Check the rep invariant of the Sentence class.
      */
     private void checkRep(){
         assert !this.displaySentence.isEmpty();
@@ -237,6 +232,23 @@ public class Sentence {
         }
         fixAvailableLetters();
         writer.write(System.currentTimeMillis()+"\n"+"back"+toString()+"\n");
+        checkRep();
+    }
+    public synchronized void goBackALetter() throws IOException {
+        // if going back to another word
+        if(letterToGuess() ==1 && wordToGuess() == 1){   
+        }
+        else if(letterToGuess() == 1 | letterToGuess() == 0){
+            List<String> prevWord = displaySentence.get(wordToGuess()-2);
+            prevWord.set(prevWord.size()-1, "_");
+            fixAvailableLetters();
+            writer.write(System.currentTimeMillis()+"\n"+"back"+toString()+"\n");
+        }
+        // if going back in the middle of a word
+        else{
+            List<String> currentWord = displaySentence.get(wordToGuess()-1);
+            currentWord.set(letterToGuess()-2, "_");
+        }
         checkRep();
     }
 
