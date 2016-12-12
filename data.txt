@@ -1,2 +1,69 @@
 
 
+1481280555331
+user yoo started
+v                                     
+1            2    3        4          
+_ _ _ _ _ _  _ _  _ _ _ _  _ _ _ _ _  
+Available Letters: R B S T U F I L O 
+
+1481281550062
+user i started
+v                          
+1        2      3          
+_ _ _ _  _ _ _  _ _ _ _ _  
+Available Letters: P D T E H Y L N O 
+
+1481281566175
+guessed: pdte
+         v                 
+1        2      3          
+P D T E  _ _ _  _ _ _ _ _  
+Available Letters: P T E H X Y L N O 
+
+1481287848232
+user hi started
+v                                           
+1          2          3          4          
+_ _ _ _ _  _ _ _ _ _  _ _ _ _ _  _ _ _ _ _  
+Available Letters: A E G I K M R S T 
+
+1481288034576
+user hu started
+v                          
+1        2      3          
+_ _ _ _  _ _ _  _ _ _ _ _  
+Available Letters: P D T E H Z L N O 
+
+1481288037919
+guessed: P
+v                          
+1        2      3          
+P _ _ _  _ _ _  _ _ _ _ _  
+Available Letters: P D T E H Z L N O 
+
+1481288077010
+user hi started
+v                                           
+1          2          3          4          
+_ _ _ _ _  _ _ _ _ _  _ _ _ _ _  _ _ _ _ _  
+Available Letters: A E G I K M R S T 
+
+1481288086587
+guessed: aegirs
+wrong size error
+
+1481288098330
+guessed: aegir
+           v                                
+1          2          3          4          
+A E G I R  _ _ _ _ _  _ _ _ _ _  _ _ _ _ _  
+Available Letters: D I K L M N S T U 
+
+1481288103648
+guessed: D
+           v                                
+1          2          3          4          
+A E G I R  D _ _ _ _  _ _ _ _ _  _ _ _ _ _  
+Available Letters: D I K L M N S T U 
+

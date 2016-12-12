@@ -18,7 +18,7 @@ import java.util.Set;
  */
 public class Sentence {
     
-    private static final int NUM_AV_LETTERS = 9;
+    private static final int NUM_AV_LETTERS = 6;
     
 
     private final List<List<String>> displaySentence = Collections.synchronizedList(new ArrayList<List<String>>());
@@ -90,8 +90,20 @@ public class Sentence {
             }
         }
     }
- 
- 
+    private void nextWord(){
+        int indexLastWord = wordToGuess() - 2;
+        List<String> wordAsList = hiddenSentence.get(indexLastWord);
+        for(int i=0; i<wordAsList.size(); i++){
+            availableLetters.remove(wordAsList.get(i));
+        }
+        if(indexLastWord+1 != hiddenSentence.size()){
+            for(int j=0; j< hiddenSentence.get(indexLastWord+1).size(); j++){
+                availableLetters.add(hiddenSentence.get(indexLastWord+1).get(j));
+            }
+        }
+        fixAvailableLetters();
+
+    }
     /**
      * Constructor for Sentence that parses the input sentence into 
      * a list of words, where each word is a list of letters (hiddenSentence),
@@ -142,6 +154,10 @@ public class Sentence {
         int indexWord = wordToGuess() - 1;
         List<String> wordAsList = Arrays.asList(word.toUpperCase().split(""));
         
+        if(indexWord==displaySentence.size()){
+            writer.write(System.currentTimeMillis()+"\nguessed: "+word+"\ninvalid letter error\n\n");
+            return "no more blanks";
+        }
         if(wordAsList.size()!=displaySentence.get(indexWord).size()){
             writer.write(System.currentTimeMillis()+"\nguessed: "+word+"\nwrong size error\n\n");
             return "wrong size";
@@ -168,6 +184,29 @@ public class Sentence {
         writer.write(System.currentTimeMillis()+"\nguessed: "+word+toString()+"\n");
         return "good";
     }
+    // TODO guessLetter
+        public synchronized String guessLetter(String letter) throws IOException {
+
+        int indexWord = wordToGuess() - 1;
+        int indexLetter = letterToGuess() -1;
+        letter = letter.toUpperCase();
+        if(indexWord==displaySentence.size()){
+            writer.write(System.currentTimeMillis()+"\nguessed: "+letter+"\ninvalid letter error\n\n");
+            return "no more blanks";
+        }
+        if(!availableLetters.contains(letter)){
+            writer.write(System.currentTimeMillis()+"\nguessed: "+letter+"\ninvalid letter error\n\n");
+            return "invalid letter";
+        }
+        displaySentence.get(indexWord).set(indexLetter, letter);
+        if(letterToGuess() == 1){
+            nextWord();
+            return "next word";
+        }
+        checkRep();
+        writer.write(System.currentTimeMillis()+"\nguessed: "+letter+toString()+"\n");
+        return "good";
+    }
     //TODO remember end case
     public synchronized int wordToGuess() {
         checkRep();
@@ -177,6 +216,18 @@ public class Sentence {
             }
         }
         return displaySentence.size()+1;
+    }
+    public synchronized int letterToGuess() {
+        checkRep();
+        if(wordToGuess() != displaySentence.size()+1){
+            List<String> word = displaySentence.get(wordToGuess()-1);
+            for(int i=0; i<word.size(); i++){
+                if(word.get(i).equals("_")){
+                    return i+1;
+                }
+            }
+        }
+        return 0;
     }
     public synchronized void goBackAWord() throws IOException {
 
@@ -212,7 +263,20 @@ public class Sentence {
         }
         return win;
     }
+    public synchronized Set<String> getAvailableLetters(){
+        return new HashSet<String>(availableLetters);
+    }
 
+    public synchronized String toStringGUI(){
+        String s = "<html><center>";
+        for(List<String> word : displaySentence){
+            for(String letter : word){
+                s+= letter+" ";
+            }
+            s+="<br>";
+        }
+        return s+"</html>";
+    }
     /**
      * Prints the display sentence and available letters to string
      * @return a string representation of the word game

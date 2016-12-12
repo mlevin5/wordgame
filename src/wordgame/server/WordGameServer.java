@@ -5,6 +5,7 @@ import java.net.*;
 import java.util.*;
 import wordgame.Sentence;
 
+
 /**
  * Word Game server.
  */
@@ -35,13 +36,14 @@ public class WordGameServer {
     //   -private methods use confinement
 
     /** Default server port. */
-    private static final int DEFAULT_PORT = 4444;
+    private static final int DEFAULT_PORT = 4443;
     /** Socket for receiving incoming connections. */
     private final ServerSocket serverSocket;
     /** Representation of the word game sentence. */
     private final Sentence sentence;
     /** Number of threads or current players in the word game. */
     private Integer players;
+  
 
     /**
      * Make a WordGameServer that listens for connections on port.
@@ -109,9 +111,11 @@ public class WordGameServer {
      */
     private void handleConnection(Socket socket) throws IOException {
         System.err.println("client "+players+" connected.");
-        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-        out.println("\nWelcome to the Word Game.\n"
+       BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+       PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+
+        
+     /*   out.println("\nWelcome to the Word Game.\n"
                 + "You are trying to guess a common phrase or idiom one word at a time\n"
                 + "from the available letters. Every time you move on to a new word, the\n"
                 + "available letters will change, but you will always have the letters\n"
@@ -122,6 +126,8 @@ public class WordGameServer {
                 + "type 'back' to keep trying. If you were right, type 'bye' to disconnect.\n"
                 + "To view this help message again at any point, type 'help'.\n"
                 + "Now, please input a username by typing 'user [username]' (no spaces).\n");
+       */
+
         try {
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 String output = handleRequest(line);
@@ -130,6 +136,7 @@ public class WordGameServer {
                     in.close();
                 } else{
                     out.println(output);
+ 
                 }
             }
         } finally {
@@ -151,12 +158,17 @@ public class WordGameServer {
      * @throws IOException if the write-to file in sentence object is not found
      */
     private String handleRequest(String input) throws IOException {
-        String regex = "(back)|(help)|(bye)|(submit)|(guess [a-zA-Z]+)|(user [a-zA-Z]+)";
+        String regex = "(back)|(help)|(bye)|(submit)|(guess [a-zA-Z]+)|(user [a-zA-Z]+)|(letter [a-zA-Z]+)";
         if ( ! input.matches(regex)) {
             // invalid input
             // TODO what should i actually be printing here?
-            return "\nInvalid input. Make sure you're not typing a space after your guess\n"
-                    + "or in your username. Type 'help' if you need the help instructions.\n";
+          /*  return "\nInvalid input. Make sure you're not typing a space after your guess\n"
+                    + "or in your username. Type 'help' if you need the help instructions.\n"; */
+            if (input.equals("")){
+                return "empty line";
+            }
+            System.out.println("a1"+input+"a2");
+            return "something else";
         }
         String[] tokens = input.split(" ");
         if (tokens[0].equals("back")) {
@@ -193,6 +205,12 @@ public class WordGameServer {
                 String user = tokens[1];
                 sentence.startGame(user);
                 return sentence.toString();
+            } else if(tokens[0].equals("letter")){
+                String letter = tokens[1];
+                String indic = sentence.guessLetter(letter);
+                if(indic.equals("invalid letter")){
+                    return "\nThe letter you guessed was not in the available letters, try again.\n";
+                }
             }
         }
         // Should never get here
