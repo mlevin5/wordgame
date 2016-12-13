@@ -20,6 +20,7 @@ public class Sentence {
     private final List<List<String>> hiddenSentence = Collections.synchronizedList(new ArrayList<List<String>>());
     private final List<List<String>> availableLetters = Collections.synchronizedList(new ArrayList<List<String>>());
     private final BufferedWriter writer;
+    private final String sentence;
 
     // Abstraction function
 
@@ -89,8 +90,8 @@ public class Sentence {
      */
     public Sentence(String sentence, String filename) throws IOException{
         this.writer = new BufferedWriter(new FileWriter(filename, true));
-        String s = sentence.toUpperCase();
-        List<String> listOfWords = Arrays.asList(s.split(" "));
+        this.sentence = sentence.toUpperCase();
+        List<String> listOfWords = Arrays.asList(this.sentence.split(" "));
         for(int i=0; i<listOfWords.size(); i++){ 
             List<String> wordAsList = Arrays.asList(listOfWords.get(i).split(""));
             this.hiddenSentence.add(wordAsList);
@@ -172,7 +173,9 @@ public class Sentence {
     }
     //TODO remember end case
     public synchronized int wordToGuess() {
+        
         checkRep();
+        System.out.println(displaySentence);
         for(int i=0; i<displaySentence.size(); i++){
             if(displaySentence.get(i).contains("_")){
                 return i+1;
@@ -242,7 +245,12 @@ public class Sentence {
         return win;
     }
     public synchronized List<String> getAvailableLetters(){
+        System.out.print(availableLetters);
+        System.out.print(wordToGuess());
         return new ArrayList<String>(availableLetters.get(wordToGuess()-1));
+    }
+    public synchronized String getSentence(){
+        return this.sentence;
     }
 
     public synchronized String toStringGUI(){

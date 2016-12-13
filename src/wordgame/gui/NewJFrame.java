@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import javax.swing.AbstractButton;
 
@@ -22,25 +21,31 @@ import wordgame.Sentence;
 public class NewJFrame extends javax.swing.JFrame {
 
     
-    private final Sentence sentence;
+    private List<Sentence> sentences = Collections.synchronizedList(new ArrayList<Sentence>());
     private final List<javax.swing.JButton> buttons = Collections.synchronizedList(new ArrayList<javax.swing.JButton>());
+    private final List<Sentence> finalSentences = Collections.synchronizedList(new ArrayList<Sentence>());
+    private Sentence sentence;
     /**
      * Creates new form NewJFrame
      */
     public NewJFrame()throws IOException{
-        List<String> s = Collections.synchronizedList(new ArrayList<String>());
-        // make a list of sentecne objects and use the next one when you want to play a new game
-        s.add("breath of fresh air");
-        s.add("break a leg");
-        s.add("eat my words");
-        s.add("fits like a glove");
-        s.add("from the ground up");
-        s.add("fruits of your labor");
-        s.add("great minds think alike");
-        s.add("hold the phone");
+        List<String> phrases = new ArrayList<String>();
+        phrases.add("breath of fresh air");
+        phrases.add("break a leg");
+        phrases.add("eat my words");
+        phrases.add("fits like a glove");
+        phrases.add("from the ground up");
+        phrases.add("fruits of your labor");
+        phrases.add("great minds think alike");
+        phrases.add("hold the phone");
+        for(String sentence : phrases){
+            sentences.add(new Sentence(sentence, "data.txt"));
+            finalSentences.add(new Sentence(sentence, "data.txt"));
+        }
         Random r = new Random();
-        int randIndex = r.nextInt(s.size());
-        this.sentence = new Sentence(s.get(randIndex),"data.txt");
+        int randIndex = r.nextInt(sentences.size());
+        sentence = sentences.remove(randIndex);
+        
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -63,11 +68,10 @@ public class NewJFrame extends javax.swing.JFrame {
         buttons.add(jButton6);
         
         List<String> availableLetters = sentence.getAvailableLetters();
-        //System.out.println(buttons.get(7));
+
         int i = 0;
         for(String newLetter : availableLetters){
             buttons.get(i).setText(newLetter);
-            System.out.println(buttons.get(i));
             buttons.get(i).addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     try {
@@ -93,7 +97,6 @@ public class NewJFrame extends javax.swing.JFrame {
                 try {
                     jButton11ActionPerformed(evt);
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -105,7 +108,6 @@ public class NewJFrame extends javax.swing.JFrame {
                 try {
                     jButton12ActionPerformed(evt);
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -232,8 +234,6 @@ public class NewJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-       // jPanel1.setVisible(true);
-       // jLayeredPane1.setVisible(false);
         jLabel3.setVisible(false);
         jButton7.setVisible(false);
         pack();
@@ -254,21 +254,24 @@ public class NewJFrame extends javax.swing.JFrame {
     // generalize to all buttons
     private void buttonActionPerformed(java.awt.event.ActionEvent evt) throws IOException {                                         
         // add letter to blank phrase
-        String letter = ((AbstractButton) evt.getSource()).getText();
-        String indic = sentence.guessLetter(letter); //index error here on last letter ?
-       // update word game display
-       jLabel2.setText(sentence.toStringGUI());
-       
-       if(indic.equals("next word")){
-           // change all available letter buttons to new available letters
-           List<String> availableLetters = sentence.getAvailableLetters();
-           int i = 0;
-           for(String newLetter : availableLetters){
-               buttons.get(i).setText(newLetter);
-               i++;
-           }
+        AbstractButton button = (AbstractButton) evt.getSource();
+        String letter = button.getText();
+        if(!letter.equals(" ")){
+            String indic = sentence.guessLetter(letter); //index error here on last letter ?
+           // update word game display
+           jLabel2.setText(sentence.toStringGUI());
+           button.setText(" ");
            
-       }
+           if(indic.equals("next word")){
+               // change all available letter buttons to new available letters
+               List<String> availableLetters = sentence.getAvailableLetters();
+               int i = 0;
+               for(String newLetter : availableLetters){
+                   buttons.get(i).setText(newLetter);
+                   i++;
+               }
+           }
+        }
     }
     
     // generalize to all buttons// BACK button
@@ -288,8 +291,15 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_jButton12ActionPerformed
         // either you win! or you lose!
         if(sentence.win()){
-            //jLabel2.setText("<html><center>YOU<br>WIN!</html>");
+            if(sentences.isEmpty()){
+                for(int i=0; i<finalSentences.size();i++){
+                    sentences.add(new Sentence (finalSentences.get(i).getSentence(),"data.txt"));
+                }
+                jLabel3.setText("<html><center>You beat<br>the Word Game!</html>");
+                jButton7.setText("Start Over?");
+            }
             winCase();
+            
         }else{
             jLabel2.setText("<html><center>YOU LOSE!<br>hit back<br>to try<br>again</html>");
         }
@@ -297,6 +307,18 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton12ActionPerformed
     
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt){
+        Random r = new Random();
+        int randIndex = r.nextInt(sentences.size());
+        sentence = sentences.remove(randIndex);
+        
+        jLabel2.setText(sentence.toStringGUI());
+        
+        List<String> availableLetters = sentence.getAvailableLetters();
+        int i = 0;
+        for(String newLetter : availableLetters){
+            buttons.get(i).setText(newLetter);
+            i++;
+        }
         newGameCase();
     }
 
