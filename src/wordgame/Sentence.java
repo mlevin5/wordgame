@@ -152,7 +152,6 @@ public class Sentence {
 
         int indexWord = wordToGuess() - 1;
         int indexLetter = letterToGuess() -1;
-        System.out.println(letter + indexWord + displaySentence.size());
         letter = letter.toUpperCase();
         if(indexWord==displaySentence.size()){
             writer.write(System.currentTimeMillis()+"\nguessed: "+letter+"\ninvalid letter error\n\n");
@@ -162,7 +161,6 @@ public class Sentence {
             writer.write(System.currentTimeMillis()+"\nguessed: "+letter+"\ninvalid letter error\n\n");
             return "invalid letter";
         }
-        System.out.println(displaySentence);
         displaySentence.get(indexWord).set(indexLetter, letter);
         if(letterToGuess() == 1){
             return "next word";
@@ -175,7 +173,6 @@ public class Sentence {
     public synchronized int wordToGuess() {
         
         checkRep();
-        System.out.println(displaySentence);
         for(int i=0; i<displaySentence.size(); i++){
             if(displaySentence.get(i).contains("_")){
                 return i+1;
@@ -245,24 +242,44 @@ public class Sentence {
         }
         return win;
     }
-    public synchronized List<String> getAvailableLetters(){
-        System.out.print(availableLetters);
-        System.out.print(wordToGuess());
-        return new ArrayList<String>(availableLetters.get(wordToGuess()-1));
+    public synchronized boolean full() throws IOException {
+        checkRep();
+        for(List<String> word : displaySentence){
+            if(word.contains("_")){
+                return false;
+            }
+        }
+        return true;
     }
+    public synchronized List<String> getAvailableLetters(){
+        return new ArrayList<String>(availableLetters.get(wordToGuess()-1));
+    } //6.035 , check out new classes
     public synchronized List<String> getLettersOfCurrentWord(){
         int wordIndex = wordToGuess()-1;
         List<String> displayWord = displaySentence.get(wordIndex);
-        System.out.println(displayWord);
         List<String> lettersInWord = new ArrayList<String>();
         for(String letter : displayWord){
             if(!letter.equals("_")){
-                System.out.println(letter);
                 lettersInWord.add(letter);
             }
         }
         return lettersInWord;
     }
+    public synchronized List<String> letterGuessesLeft(){
+        List<String> leftover = new ArrayList<String>(getAvailableLetters());
+        List<String> lettersOfCurrentWord = new ArrayList<String>(getLettersOfCurrentWord());
+        for(String letter : getAvailableLetters()){
+            if(lettersOfCurrentWord.contains(letter)){
+                lettersOfCurrentWord.remove(letter);
+                leftover.remove(letter);
+                System.out.println(letter);
+            }
+        }System.out.println(leftover);
+        return leftover;
+    }
+   // sentence.getAvailableLetters() - sentence
+    //.getLettersOfCurrentWord()
+    
     public synchronized String getSentence(){
         return this.sentence;
     }

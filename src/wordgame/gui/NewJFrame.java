@@ -256,8 +256,8 @@ public class NewJFrame extends javax.swing.JFrame {
         // add letter to blank phrase
         AbstractButton button = (AbstractButton) evt.getSource();
         String letter = button.getText();
-        if(!letter.equals(" ")){
-            String indic = sentence.guessLetter(letter); 
+        if(!letter.equals(" ") && !sentence.full()){
+           String indic = sentence.guessLetter(letter); 
            // update word game display
            jLabel2.setText(sentence.toStringGUI());
            button.setText(" ");
@@ -280,30 +280,26 @@ public class NewJFrame extends javax.swing.JFrame {
         int backWord = sentence.letterToGuess();
         String removedLetter = sentence.goBackALetter();
         jLabel2.setText(sentence.toStringGUI());
-        // if youre going back a word, then change the availbale letters, then remove the removed letter
+         //if youre going back a word, then change the availbale letters, then remove the removed letter
         if(backWord == 1){
-            List<String> availableLetters = sentence.getAvailableLetters();
             for(int j = 0; j<buttons.size(); j++){
                 buttons.get(j).setText(" ");
             }
             int i = 0;
-            for(String newLetter : sentence.getLettersOfCurrentWord()){
+            for(String newLetter : sentence.letterGuessesLeft()){
                 buttons.get(i).setText(newLetter);
                 i++;
             }
         }else{
             for(javax.swing.JButton button : buttons){
                 if(button.getText().equals(" ")){
+                    System.out.println(button.getText());
+                    System.out.println(removedLetter);
                     button.setText(removedLetter);
                     break;
                 }
             }
         }
-      /*     int i = 0;
-           for(String newLetter : availableLetters){
-               buttons.get(i).setText(newLetter);
-               i++;
-           } */
         
     }//GEN-LAST:event_jButton11ActionPerformed
 // SUBMIT button
