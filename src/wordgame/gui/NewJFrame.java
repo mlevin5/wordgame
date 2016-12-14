@@ -257,7 +257,7 @@ public class NewJFrame extends javax.swing.JFrame {
         AbstractButton button = (AbstractButton) evt.getSource();
         String letter = button.getText();
         if(!letter.equals(" ")){
-            String indic = sentence.guessLetter(letter); //index error here on last letter ?
+            String indic = sentence.guessLetter(letter); 
            // update word game display
            jLabel2.setText(sentence.toStringGUI());
            button.setText(" ");
@@ -277,14 +277,33 @@ public class NewJFrame extends javax.swing.JFrame {
     // generalize to all buttons// BACK button
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_jButton11ActionPerformed
         // do i want to go back a word or back a letter?
-        sentence.goBackALetter(); 
+        int backWord = sentence.letterToGuess();
+        String removedLetter = sentence.goBackALetter();
         jLabel2.setText(sentence.toStringGUI());
-        List<String> availableLetters = sentence.getAvailableLetters();
-           int i = 0;
+        // if youre going back a word, then change the availbale letters, then remove the removed letter
+        if(backWord == 1){
+            List<String> availableLetters = sentence.getAvailableLetters();
+            for(int j = 0; j<buttons.size(); j++){
+                buttons.get(j).setText(" ");
+            }
+            int i = 0;
+            for(String newLetter : sentence.getLettersOfCurrentWord()){
+                buttons.get(i).setText(newLetter);
+                i++;
+            }
+        }else{
+            for(javax.swing.JButton button : buttons){
+                if(button.getText().equals(" ")){
+                    button.setText(removedLetter);
+                    break;
+                }
+            }
+        }
+      /*     int i = 0;
            for(String newLetter : availableLetters){
                buttons.get(i).setText(newLetter);
                i++;
-           }
+           } */
         
     }//GEN-LAST:event_jButton11ActionPerformed
 // SUBMIT button

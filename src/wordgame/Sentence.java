@@ -204,21 +204,22 @@ public class Sentence {
         writer.write(System.currentTimeMillis()+"\n"+"back"+toString()+"\n");
         checkRep();
     }
-    public synchronized void goBackALetter() throws IOException {
+    public synchronized String goBackALetter() throws IOException {
         // if going back to another word
-        if(letterToGuess() ==1 && wordToGuess() == 1){   
+        if(letterToGuess() ==1 && wordToGuess() == 1){  
+            return "";
         }
         else if(letterToGuess() == 1 | letterToGuess() == 0){
             List<String> prevWord = displaySentence.get(wordToGuess()-2);
-            prevWord.set(prevWord.size()-1, "_");
             writer.write(System.currentTimeMillis()+"\n"+"back"+toString()+"\n");
+            return prevWord.set(prevWord.size()-1, "_");
         }
         // if going back in the middle of a word
         else{
             List<String> currentWord = displaySentence.get(wordToGuess()-1);
-            currentWord.set(letterToGuess()-2, "_");
+            writer.write(System.currentTimeMillis()+"\n"+"back"+toString()+"\n");
+            return currentWord.set(letterToGuess()-2, "_");
         }
-        checkRep();
     }
 
     public synchronized void startGame(String user) throws IOException {
@@ -248,6 +249,19 @@ public class Sentence {
         System.out.print(availableLetters);
         System.out.print(wordToGuess());
         return new ArrayList<String>(availableLetters.get(wordToGuess()-1));
+    }
+    public synchronized List<String> getLettersOfCurrentWord(){
+        int wordIndex = wordToGuess()-1;
+        List<String> displayWord = displaySentence.get(wordIndex);
+        System.out.println(displayWord);
+        List<String> lettersInWord = new ArrayList<String>();
+        for(String letter : displayWord){
+            if(!letter.equals("_")){
+                System.out.println(letter);
+                lettersInWord.add(letter);
+            }
+        }
+        return lettersInWord;
     }
     public synchronized String getSentence(){
         return this.sentence;
