@@ -1,15 +1,12 @@
 package wordgame;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
+
 
 public class Sentence {
     
@@ -19,9 +16,8 @@ public class Sentence {
     private final List<List<String>> displaySentence = Collections.synchronizedList(new ArrayList<List<String>>());
     private final List<List<String>> hiddenSentence = Collections.synchronizedList(new ArrayList<List<String>>());
     private final List<List<String>> availableLetters = Collections.synchronizedList(new ArrayList<List<String>>());
-    private final BufferedWriter writer;
     private final String sentence;
-
+    
     // Abstraction function
 
     // Rep invariant
@@ -88,8 +84,7 @@ public class Sentence {
      * @param filename - the name of the file to store the user's action data in
      * @throws IOException if there is a problem writing to the file
      */
-    public Sentence(String sentence, String filename) throws IOException{
-        this.writer = new BufferedWriter(new FileWriter(filename, true));
+    public Sentence(String sentence) throws IOException{
         this.sentence = sentence.toUpperCase();
         List<String> listOfWords = Arrays.asList(this.sentence.split(" "));
         for(int i=0; i<listOfWords.size(); i++){ 
@@ -97,9 +92,7 @@ public class Sentence {
             this.hiddenSentence.add(wordAsList);
             List<String> displayWordAsList = new ArrayList<String>();
             for(int j=0; j< wordAsList.size(); j++){
-                String letter = wordAsList.get(j);
                 displayWordAsList.add("_");
-               
             }
             this.displaySentence.add(displayWordAsList);    
         }
@@ -119,46 +112,36 @@ public class Sentence {
      * was changed to reflect the user's guess.
      * @throws IOException
      */
-    public synchronized String guessWord(String word) throws IOException {
-
+    public synchronized String guessWord(String word) {
         int indexWord = wordToGuess() - 1;
-        List<String> wordAsList = Arrays.asList(word.toUpperCase().split(""));
-        
+        List<String> wordAsList = Arrays.asList(word.toUpperCase().split(""));    
         if(indexWord==displaySentence.size()){
-            writer.write(System.currentTimeMillis()+"\nguessed: "+word+"\ninvalid letter error\n\n");
             return "no more blanks";
         }
         if(wordAsList.size()!=displaySentence.get(indexWord).size()){
-            writer.write(System.currentTimeMillis()+"\nguessed: "+word+"\nwrong size error\n\n");
             return "wrong size";
         }
         for(String letter : wordAsList){
             if(!getAvailableLetters().contains(letter)){
-                writer.write(System.currentTimeMillis()+"\nguessed: "+word+"\ninvalid letters error\n\n");
                 return "invalid letters";
             }
         }
         for(int i=0; i<wordAsList.size(); i++){
             displaySentence.get(indexWord).set(i,wordAsList.get(i));
         }
-
-
         checkRep();
-        writer.write(System.currentTimeMillis()+"\nguessed: "+word+toString()+"\n");
         return "good";
     }
-    // TODO guessLetter
-        public synchronized String guessLetter(String letter) throws IOException {
+    
+    public synchronized String guessLetter(String letter) throws IOException {
 
         int indexWord = wordToGuess() - 1;
         int indexLetter = letterToGuess() -1;
         letter = letter.toUpperCase();
         if(indexWord==displaySentence.size()){
-            writer.write(System.currentTimeMillis()+"\nguessed: "+letter+"\ninvalid letter error\n\n");
             return "no more blanks";
         }
         if(!getAvailableLetters().contains(letter)){
-            writer.write(System.currentTimeMillis()+"\nguessed: "+letter+"\ninvalid letter error\n\n");
             return "invalid letter";
         }
         displaySentence.get(indexWord).set(indexLetter, letter);
@@ -166,10 +149,9 @@ public class Sentence {
             return "next word";
         }
         checkRep();
-        writer.write(System.currentTimeMillis()+"\nguessed: "+letter+toString()+"\n");
         return "good";
     }
-    //TODO remember end case
+
     public synchronized int wordToGuess() {
         
         checkRep();
@@ -198,7 +180,6 @@ public class Sentence {
         for(int i=0;i<prevWord.size();i++){
             prevWord.set(i, "_");
         }
-        writer.write(System.currentTimeMillis()+"\n"+"back"+toString()+"\n");
         checkRep();
     }
     public synchronized String goBackALetter() throws IOException {
@@ -208,39 +189,29 @@ public class Sentence {
         }
         else if(letterToGuess() == 1 | letterToGuess() == 0){
             List<String> prevWord = displaySentence.get(wordToGuess()-2);
-            writer.write(System.currentTimeMillis()+"\n"+"back"+toString()+"\n");
             return prevWord.set(prevWord.size()-1, "_");
         }
         // if going back in the middle of a word
         else{
             List<String> currentWord = displaySentence.get(wordToGuess()-1);
-            writer.write(System.currentTimeMillis()+"\n"+"back"+toString()+"\n");
             return currentWord.set(letterToGuess()-2, "_");
         }
     }
 
-    public synchronized void startGame(String user) throws IOException {
-        checkRep();
-        writer.write(System.currentTimeMillis()+"\n"+"user "+user+" started"+toString()+"\n");
-    }
-    public synchronized void closeWriter() throws IOException {
-        checkRep();
-        writer.close();
-    }
     public synchronized int curWordLen() {
         checkRep();
         return hiddenSentence.get(wordToGuess()-1).size();
     }
+    public synchronized String lastWordCheck(){
+        int index = wordToGuess() - 2;
+        if(displaySentence.get(index).equals(hiddenSentence.get(index))){
+            return "RIGHT";
+        }
+        return "WRONG";
+    }
     public synchronized boolean win() throws IOException {
         checkRep();
-        boolean win = displaySentence.equals(hiddenSentence);
-        long endTime = System.currentTimeMillis();
-        if(win){
-            writer.write(endTime+"\nwin!\n\n");
-        }else{
-            writer.write(endTime+"\n"+"wrong submission\n\n");
-        }
-        return win;
+        return displaySentence.equals(hiddenSentence);
     }
     public synchronized boolean full() throws IOException {
         checkRep();
@@ -272,9 +243,8 @@ public class Sentence {
             if(lettersOfCurrentWord.contains(letter)){
                 lettersOfCurrentWord.remove(letter);
                 leftover.remove(letter);
-                System.out.println(letter);
             }
-        }System.out.println(leftover);
+        }
         return leftover;
     }
    // sentence.getAvailableLetters() - sentence
@@ -295,15 +265,15 @@ public class Sentence {
         return s+"</html>";
     }
     
-    public synchronized String toStringGlitterGUI(){
-        String s = "<html><center>";
+    public synchronized String toStringSimple(){
+        String s = "";
         for(List<String> word : displaySentence){
             for(String letter : word){
                 s+= letter+" ";
             }
-            s+="<br>";
+            s+=" ";
         }
-        return s+"</html>";
+        return s;
     }
     
     /**

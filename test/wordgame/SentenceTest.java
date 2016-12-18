@@ -10,7 +10,7 @@ public class SentenceTest {
 
     @Test
     public void test() throws IOException {
-        Sentence sentence = new Sentence("the cow","test.txt");
+        Sentence sentence = new Sentence("the cow");
         sentence.guessLetter("t");
         sentence.guessLetter("h");
         System.out.println("current words "+sentence.getLettersOfCurrentWord());

@@ -1,69 +1,718 @@
 
-
-1481280555331
-user yoo started
-v                                     
-1            2    3        4          
+1481860625095
+E _ _  _ _  _ _ _ _ _  
+guessed letter: E
+1481860625632
+E A _  _ _  _ _ _ _ _  
+guessed letter: A
+1481860626417
+E A T  _ _  _ _ _ _ _  
+guessed letter: T
+guessed word #1: RIGHT
+1481860630862
+E A _  _ _  _ _ _ _ _  
+went back letter: T
+went back to start on word #1
+1481860631425
+E _ _  _ _  _ _ _ _ _  
+went back letter: A
+1481860631836
+_ _ _  _ _  _ _ _ _ _  
+went back letter: E
+1481860633226
+L _ _  _ _  _ _ _ _ _  
+guessed letter: L
+1481860633886
+L E _  _ _  _ _ _ _ _  
+guessed letter: E
+1481860634459
+L E T  _ _  _ _ _ _ _  
+guessed letter: T
+guessed word #1: WRONG
+1481860641957
+L E T  N _  _ _ _ _ _  
+guessed letter: N
+1481860643349
+L E T  N Y  _ _ _ _ _  
+guessed letter: Y
+guessed word #2: WRONG
+1481860644558
+L E T  N Y  W _ _ _ _  
+guessed letter: W
+1481860645607
+L E T  N Y  W O _ _ _  
+guessed letter: O
+1481860646204
+L E T  N Y  W O D _ _  
+guessed letter: D
+1481860649527
+L E T  N Y  W O _ _ _  
+went back letter: D
+1481860649680
+L E T  N Y  W _ _ _ _  
+went back letter: O
+1481860649841
+L E T  N Y  _ _ _ _ _  
+went back letter: W
+1481860649986
+L E T  N _  _ _ _ _ _  
+went back letter: Y
+went back to start on word #2
+1481860650123
+L E T  _ _  _ _ _ _ _  
+went back letter: N
+1481860655905
+L E _  _ _  _ _ _ _ _  
+went back letter: T
+went back to start on word #1
+1481860656513
+L _ _  _ _  _ _ _ _ _  
+went back letter: E
+1481860657102
+_ _ _  _ _  _ _ _ _ _  
+went back letter: L
+1481860657456
+_ _ _  _ _  _ _ _ _ _  
+went back letter: 
+went back to start on word #1
+1481860659784
+D _ _  _ _  _ _ _ _ _  
+guessed letter: D
+1481860660408
+D E _  _ _  _ _ _ _ _  
+guessed letter: E
+1481860660876
+D E T  _ _  _ _ _ _ _  
+guessed letter: T
+guessed word #1: WRONG
+1481860832008
+B _ _ _ _  _  _ _ _  
+guessed letter: B
+1481860832622
+B R _ _ _  _  _ _ _  
+guessed letter: R
+1481860833216
+B R E _ _  _  _ _ _  
+guessed letter: E
+1481860833878
+B R E A _  _  _ _ _  
+guessed letter: A
+1481860835969
+B R E _ _  _  _ _ _  
+went back letter: A
+1481860836248
+B R _ _ _  _  _ _ _  
+went back letter: E
+1481860836506
+B _ _ _ _  _  _ _ _  
+went back letter: R
+1481860836782
+_ _ _ _ _  _  _ _ _  
+went back letter: B
+1481860838598
+W _ _ _ _  _  _ _ _  
+guessed letter: W
+1481860840789
+_ _ _ _ _  _  _ _ _  
+went back letter: W
+1481860847077
+B _ _ _ _  _  _ _ _  
+guessed letter: B
+1481860847635
+B R _ _ _  _  _ _ _  
+guessed letter: R
+1481860848078
+B R A _ _  _  _ _ _  
+guessed letter: A
+1481860848576
+B R A K _  _  _ _ _  
+guessed letter: K
+1481860849096
+B R A K E  _  _ _ _  
+guessed letter: E
+guessed word #1: WRONG
+1481860850060
+B R A K _  _  _ _ _  
+went back letter: E
+went back to start on word #1
+1481860850230
+B R A _ _  _  _ _ _  
+went back letter: K
+1481860850399
+B R _ _ _  _  _ _ _  
+went back letter: A
+1481860851676
+B R E _ _  _  _ _ _  
+guessed letter: E
+1481860852136
+B R E A _  _  _ _ _  
+guessed letter: A
+1481860852734
+B R E A K  _  _ _ _  
+guessed letter: K
+guessed word #1: RIGHT
+1481860853468
+B R E A K  A  _ _ _  
+guessed letter: A
+guessed word #2: RIGHT
+1481860854543
+B R E A K  A  L _ _  
+guessed letter: L
+1481860855100
+B R E A K  A  L E _  
+guessed letter: E
+1481860855665
+B R E A K  A  L E G  
+guessed letter: G
+1481860856813
+B R E A K  A  L E G  WINNER!
+phrases started over
+1481860865464
+P _ _ _  _ _ _ _  _  _ _ _ _ _  
+guessed letter: P
+1481860866631
+P I _ _  _ _ _ _  _  _ _ _ _ _  
+guessed letter: I
+1481860867252
+P I G _  _ _ _ _  _  _ _ _ _ _  
+guessed letter: G
+1481860867833
+P I G S  _ _ _ _  _  _ _ _ _ _  
+guessed letter: S
+guessed word #1: WRONG
+1481860869468
+P I G S  L _ _ _  _  _ _ _ _ _  
+guessed letter: L
+1481860870244
+P I G S  L I _ _  _  _ _ _ _ _  
+guessed letter: I
+1481860870753
+P I G S  L I K _  _  _ _ _ _ _  
+guessed letter: K
+1481860871329
+P I G S  L I K E  _  _ _ _ _ _  
+guessed letter: E
+guessed word #2: RIGHT
+1481860872398
+P I G S  L I K E  A  _ _ _ _ _  
+guessed letter: A
+guessed word #3: RIGHT
+1481860875447
+P I G S  L I K E  A  G _ _ _ _  
+guessed letter: G
+1481860876085
+P I G S  L I K E  A  G L _ _ _  
+guessed letter: L
+1481860876563
+P I G S  L I K E  A  G L O _ _  
+guessed letter: O
+1481860876918
+P I G S  L I K E  A  G L O V _  
+guessed letter: V
+1481860877370
+P I G S  L I K E  A  G L O V E  
+guessed letter: E
+1481860878896
+P I G S  L I K E  A  G L O V E  
+LOSER!
+1481860880655
+P I G S  L I K E  A  G L O V _  
+went back letter: E
+1481860881103
+P I G S  L I K E  A  G L O _ _  
+went back letter: V
+1481860881248
+P I G S  L I K E  A  G L _ _ _  
+went back letter: O
+1481860881385
+P I G S  L I K E  A  G _ _ _ _  
+went back letter: L
+1481860881524
+P I G S  L I K E  A  _ _ _ _ _  
+went back letter: G
+1481860881660
+P I G S  L I K E  _  _ _ _ _ _  
+went back letter: A
+went back to start on word #3
+1481860881781
+P I G S  L I K _  _  _ _ _ _ _  
+went back letter: E
+went back to start on word #2
+1481860881910
+P I G S  L I _ _  _  _ _ _ _ _  
+went back letter: K
+1481860882039
+P I G S  L _ _ _  _  _ _ _ _ _  
+went back letter: I
+1481860882379
+P I G S  _ _ _ _  _  _ _ _ _ _  
+went back letter: L
+1481860882532
+P I G _  _ _ _ _  _  _ _ _ _ _  
+went back letter: S
+went back to start on word #1
+1481860882693
+P I _ _  _ _ _ _  _  _ _ _ _ _  
+went back letter: G
+1481860882830
+P _ _ _  _ _ _ _  _  _ _ _ _ _  
+went back letter: I
+1481860883130
+_ _ _ _  _ _ _ _  _  _ _ _ _ _  
+went back letter: P
+1481860884012
+F _ _ _  _ _ _ _  _  _ _ _ _ _  
+guessed letter: F
+1481860884512
+F I _ _  _ _ _ _  _  _ _ _ _ _  
+guessed letter: I
+1481860885580
+F I T _  _ _ _ _  _  _ _ _ _ _  
+guessed letter: T
+1481860886103
+F I T S  _ _ _ _  _  _ _ _ _ _  
+guessed letter: S
+guessed word #1: RIGHT
+1481860886919
+F I T S  L _ _ _  _  _ _ _ _ _  
+guessed letter: L
+1481860887427
+F I T S  L I _ _  _  _ _ _ _ _  
+guessed letter: I
+1481860887960
+F I T S  L I K _  _  _ _ _ _ _  
+guessed letter: K
+1481860888404
+F I T S  L I K E  _  _ _ _ _ _  
+guessed letter: E
+guessed word #2: RIGHT
+1481860889481
+F I T S  L I K E  A  _ _ _ _ _  
+guessed letter: A
+guessed word #3: RIGHT
+1481860890452
+F I T S  L I K E  A  G _ _ _ _  
+guessed letter: G
+1481860890888
+F I T S  L I K E  A  G L _ _ _  
+guessed letter: L
+1481860891331
+F I T S  L I K E  A  G L O _ _  
+guessed letter: O
+1481860891751
+F I T S  L I K E  A  G L O V _  
+guessed letter: V
+1481860892234
+F I T S  L I K E  A  G L O V E  
+guessed letter: E
+1481860892935
+F I T S  L I K E  A  G L O V E  WINNER!
+phrases started over
+1481861178997
+E _ _  _ _  _ _ _ _ _  
+guessed letter: E
+1481861179755
+E A _  _ _  _ _ _ _ _  
+guessed letter: A
+1481861180270
+E A T  _ _  _ _ _ _ _  
+guessed letter: T
+guessed word #1: RIGHT
+1481861181685
+E A T  M _  _ _ _ _ _  
+guessed letter: M
+1481861182168
+E A T  M Y  _ _ _ _ _  
+guessed letter: Y
+guessed word #2: RIGHT
+1481861183121
+E A T  M Y  W _ _ _ _  
+guessed letter: W
+1481861183613
+E A T  M Y  W O _ _ _  
+guessed letter: O
+1481861184220
+E A T  M Y  W O R _ _  
+guessed letter: R
+1481861185372
+E A T  M Y  W O _ _ _  
+went back letter: R
+1481861185659
+E A T  M Y  W _ _ _ _  
+went back letter: O
+1481861185975
+E A T  M Y  _ _ _ _ _  
+went back letter: W
+1481861186270
+E A T  M _  _ _ _ _ _  
+went back letter: Y
+went back to start on word #2
+1481861186563
+E A T  _ _  _ _ _ _ _  
+went back letter: M
+1481861186835
+E A _  _ _  _ _ _ _ _  
+went back letter: T
+went back to start on word #1
+1481861187160
+E _ _  _ _  _ _ _ _ _  
+went back letter: A
+1481861187499
+_ _ _  _ _  _ _ _ _ _  
+went back letter: E
+1481861188553
+E _ _  _ _  _ _ _ _ _  
+guessed letter: E
+1481861189095
+E A _  _ _  _ _ _ _ _  
+guessed letter: A
+1481861189594
+E A T  _ _  _ _ _ _ _  
+guessed letter: T
+guessed word #1: RIGHT
+1481861190769
+E A T  M _  _ _ _ _ _  
+guessed letter: M
+1481861191238
+E A T  M Y  _ _ _ _ _  
+guessed letter: Y
+guessed word #2: RIGHT
+1481861192344
+E A T  M Y  W _ _ _ _  
+guessed letter: W
+1481861192751
+E A T  M Y  W O _ _ _  
+guessed letter: O
+1481861193240
+E A T  M Y  W O R _ _  
+guessed letter: R
+1481861193752
+E A T  M Y  W O R D _  
+guessed letter: D
+1481861194200
+E A T  M Y  W O R D C  
+guessed letter: C
+1481861195264
+E A T  M Y  W O R D _  
+went back letter: C
+1481861195724
+E A T  M Y  W O R D S  
+guessed letter: S
+1481861196601
+E A T  M Y  W O R D S  WINNER!
+1481861970871
+_ _ _ _ _  _ _ _ _ _  _ _ _ _ _  _ _ _ _ _  
+new game begins
+1481861974765
+G _ _ _ _  _ _ _ _ _  _ _ _ _ _  _ _ _ _ _  
+guessed letter: G
+1481861975508
+G R _ _ _  _ _ _ _ _  _ _ _ _ _  _ _ _ _ _  
+guessed letter: R
+1481861975932
+G R E _ _  _ _ _ _ _  _ _ _ _ _  _ _ _ _ _  
+guessed letter: E
+1481861976344
+G R E A _  _ _ _ _ _  _ _ _ _ _  _ _ _ _ _  
+guessed letter: A
+1481861976839
+G R E A T  _ _ _ _ _  _ _ _ _ _  _ _ _ _ _  
+guessed letter: T
+guessed word #1: RIGHT
+1481861977678
+G R E A T  M _ _ _ _  _ _ _ _ _  _ _ _ _ _  
+guessed letter: M
+1481861978079
+G R E A T  M I _ _ _  _ _ _ _ _  _ _ _ _ _  
+guessed letter: I
+1481861978571
+G R E A T  M I N _ _  _ _ _ _ _  _ _ _ _ _  
+guessed letter: N
+1481861979193
+G R E A T  M I N D _  _ _ _ _ _  _ _ _ _ _  
+guessed letter: D
+1481861979627
+G R E A T  M I N D S  _ _ _ _ _  _ _ _ _ _  
+guessed letter: S
+guessed word #2: RIGHT
+1481861981163
+G R E A T  M I N D S  T _ _ _ _  _ _ _ _ _  
+guessed letter: T
+1481861981740
+G R E A T  M I N D S  T H _ _ _  _ _ _ _ _  
+guessed letter: H
+1481861982203
+G R E A T  M I N D S  T H I _ _  _ _ _ _ _  
+guessed letter: I
+1481861982660
+G R E A T  M I N D S  T H I N _  _ _ _ _ _  
+guessed letter: N
+1481861983023
+G R E A T  M I N D S  T H I N K  _ _ _ _ _  
+guessed letter: K
+guessed word #3: RIGHT
+1481861984228
+G R E A T  M I N D S  T H I N K  A _ _ _ _  
+guessed letter: A
+1481861984986
+G R E A T  M I N D S  T H I N K  A L _ _ _  
+guessed letter: L
+1481861985366
+G R E A T  M I N D S  T H I N K  A L I _ _  
+guessed letter: I
+1481861985890
+G R E A T  M I N D S  T H I N K  A L I K _  
+guessed letter: K
+1481861986262
+G R E A T  M I N D S  T H I N K  A L I K E  
+guessed letter: E
+1481861986862
+G R E A T  M I N D S  T H I N K  A L I K E  WINNER!
+1481861987540
+_ _ _ _  _ _ _  _ _ _ _ _  
+new game begins
+phrases started over
+1481861989079
+D _ _ _  _ _ _  _ _ _ _ _  
+guessed letter: D
+1481861989641
+D O _ _  _ _ _  _ _ _ _ _  
+guessed letter: O
+1481861990247
+D O L _  _ _ _  _ _ _ _ _  
+guessed letter: L
+1481861990774
+D O L P  _ _ _  _ _ _ _ _  
+guessed letter: P
+guessed word #1: WRONG
+1481861991923
+D O L _  _ _ _  _ _ _ _ _  
+went back letter: P
+went back to start on word #1
+1481861992079
+D O _ _  _ _ _  _ _ _ _ _  
+went back letter: L
+1481861992239
+D _ _ _  _ _ _  _ _ _ _ _  
+went back letter: O
+1481861992575
+_ _ _ _  _ _ _  _ _ _ _ _  
+went back letter: D
+1481861993650
+H _ _ _  _ _ _  _ _ _ _ _  
+guessed letter: H
+1481861994239
+H O _ _  _ _ _  _ _ _ _ _  
+guessed letter: O
+1481861994670
+H O L _  _ _ _  _ _ _ _ _  
+guessed letter: L
+1481861995208
+H O L D  _ _ _  _ _ _ _ _  
+guessed letter: D
+guessed word #1: RIGHT
+1481861996411
+H O L D  T _ _  _ _ _ _ _  
+guessed letter: T
+1481861996912
+H O L D  T H _  _ _ _ _ _  
+guessed letter: H
+1481861997359
+H O L D  T H E  _ _ _ _ _  
+guessed letter: E
+guessed word #2: RIGHT
+1481861998337
+H O L D  T H E  P _ _ _ _  
+guessed letter: P
+1481861998809
+H O L D  T H E  P H _ _ _  
+guessed letter: H
+1481861999420
+H O L D  T H E  P H O _ _  
+guessed letter: O
+1481861999783
+H O L D  T H E  P H O N _  
+guessed letter: N
+1481862000239
+H O L D  T H E  P H O N E  
+guessed letter: E
+1481862001020
+H O L D  T H E  P H O N E  WINNER!
+1481862001712
 _ _ _ _ _ _  _ _  _ _ _ _  _ _ _ _ _  
-Available Letters: R B S T U F I L O 
+new game begins
+phrases started over
 
-1481281550062
-user i started
-v                          
-1        2      3          
-_ _ _ _  _ _ _  _ _ _ _ _  
-Available Letters: P D T E H Y L N O 
+NEW SESSION
 
-1481281566175
-guessed: pdte
-         v                 
-1        2      3          
-P D T E  _ _ _  _ _ _ _ _  
-Available Letters: P T E H X Y L N O 
+1482039487409
+_ _ _ _  _ _ _ _  _  _ _ _ _ _  
+new game begins
+1482039493488
+P _ _ _  _ _ _ _  _  _ _ _ _ _  
+guessed letter: P
+1482039493906
+P I _ _  _ _ _ _  _  _ _ _ _ _  
+guessed letter: I
+1482039494453
+P I T _  _ _ _ _  _  _ _ _ _ _  
+guessed letter: T
+1482039494873
+P I T S  _ _ _ _  _  _ _ _ _ _  
+guessed letter: S
+guessed word #1: WRONG
+1482039496282
+P I T S  L _ _ _  _  _ _ _ _ _  
+guessed letter: L
+1482039496847
+P I T S  L I _ _  _  _ _ _ _ _  
+guessed letter: I
+1482039497267
+P I T S  L I K _  _  _ _ _ _ _  
+guessed letter: K
+1482039497698
+P I T S  L I K E  _  _ _ _ _ _  
+guessed letter: E
+guessed word #2: RIGHT
+1482039498856
+P I T S  L I K E  A  _ _ _ _ _  
+guessed letter: A
+guessed word #3: RIGHT
+1482039499867
+P I T S  L I K E  A  G _ _ _ _  
+guessed letter: G
+1482039500375
+P I T S  L I K E  A  G L _ _ _  
+guessed letter: L
+1482039500738
+P I T S  L I K E  A  G L O _ _  
+guessed letter: O
+1482039501577
+P I T S  L I K E  A  G L O V _  
+guessed letter: V
+1482039502174
+P I T S  L I K E  A  G L O V E  
+guessed letter: E
+guessed word #4: RIGHT
+1482039503777
+P I T S  L I K E  A  G L O V E  
+LOSER!
+1482039504922
+P I T S  L I K E  A  G L O V _  
+went back letter: E
+1482039505892
+P I T S  L I K E  A  G L O _ _  
+went back letter: V
+1482039506158
+P I T S  L I K E  A  G L _ _ _  
+went back letter: O
+1482039506392
+P I T S  L I K E  A  G _ _ _ _  
+went back letter: L
+1482039506623
+P I T S  L I K E  A  _ _ _ _ _  
+went back letter: G
+1482039506847
+P I T S  L I K E  _  _ _ _ _ _  
+went back letter: A
+went back to start on word #3
+1482039507072
+P I T S  L I K _  _  _ _ _ _ _  
+went back letter: E
+went back to start on word #2
+1482039507268
+P I T S  L I _ _  _  _ _ _ _ _  
+went back letter: K
+1482039507502
+P I T S  L _ _ _  _  _ _ _ _ _  
+went back letter: I
+1482039507697
+P I T S  _ _ _ _  _  _ _ _ _ _  
+went back letter: L
+1482039507945
+P I T _  _ _ _ _  _  _ _ _ _ _  
+went back letter: S
+went back to start on word #1
+1482039508253
+P I _ _  _ _ _ _  _  _ _ _ _ _  
+went back letter: T
+1482039508480
+P _ _ _  _ _ _ _  _  _ _ _ _ _  
+went back letter: I
+1482039508665
+_ _ _ _  _ _ _ _  _  _ _ _ _ _  
+went back letter: P
+1482039510075
+P _ _ _  _ _ _ _  _  _ _ _ _ _  
+guessed letter: P
+1482039510528
+P I _ _  _ _ _ _  _  _ _ _ _ _  
+guessed letter: I
+1482039511899
+P I T _  _ _ _ _  _  _ _ _ _ _  
+guessed letter: T
+1482039512506
+P I T S  _ _ _ _  _  _ _ _ _ _  
+guessed letter: S
+guessed word #1: WRONG
+1482039515839
+P I T S  L _ _ _  _  _ _ _ _ _  
+guessed letter: L
+1482039516503
+P I T S  L I _ _  _  _ _ _ _ _  
+guessed letter: I
+1482039516890
+P I T S  L I K _  _  _ _ _ _ _  
+guessed letter: K
+1482039517568
+P I T S  L I K E  _  _ _ _ _ _  
+guessed letter: E
+guessed word #2: RIGHT
+1482039518587
+P I T S  L I K _  _  _ _ _ _ _  
+went back letter: E
+went back to start on word #2
+1482039518735
+P I T S  L I _ _  _  _ _ _ _ _  
+went back letter: K
+1482039518879
+P I T S  L _ _ _  _  _ _ _ _ _  
+went back letter: I
+1482039519017
+P I T S  _ _ _ _  _  _ _ _ _ _  
+went back letter: L
+1482039519159
+P I T _  _ _ _ _  _  _ _ _ _ _  
+went back letter: S
+went back to start on word #1
+1482039519299
+P I _ _  _ _ _ _  _  _ _ _ _ _  
+went back letter: T
+1482039519444
+P _ _ _  _ _ _ _  _  _ _ _ _ _  
+went back letter: I
+1482039519590
+_ _ _ _  _ _ _ _  _  _ _ _ _ _  
+went back letter: P
+1482039520769
+F _ _ _  _ _ _ _  _  _ _ _ _ _  
+guessed letter: F
+1482039521166
+F I _ _  _ _ _ _  _  _ _ _ _ _  
+guessed letter: I
+1482039521662
+F I T _  _ _ _ _  _  _ _ _ _ _  
+guessed letter: T
+1482039522058
+F I T S  _ _ _ _  _  _ _ _ _ _  
+guessed letter: S
+guessed word #1: RIGHT
+1482039529817
+F I T S  L _ _ _  _  _ _ _ _ _  
+guessed letter: L
 
-1481287848232
-user hi started
-v                                           
-1          2          3          4          
-_ _ _ _ _  _ _ _ _ _  _ _ _ _ _  _ _ _ _ _  
-Available Letters: A E G I K M R S T 
+NEW SESSION
 
-1481288034576
-user hu started
-v                          
-1        2      3          
-_ _ _ _  _ _ _  _ _ _ _ _  
-Available Letters: P D T E H Z L N O 
-
-1481288037919
-guessed: P
-v                          
-1        2      3          
-P _ _ _  _ _ _  _ _ _ _ _  
-Available Letters: P D T E H Z L N O 
-
-1481288077010
-user hi started
-v                                           
-1          2          3          4          
-_ _ _ _ _  _ _ _ _ _  _ _ _ _ _  _ _ _ _ _  
-Available Letters: A E G I K M R S T 
-
-1481288086587
-guessed: aegirs
-wrong size error
-
-1481288098330
-guessed: aegir
-           v                                
-1          2          3          4          
-A E G I R  _ _ _ _ _  _ _ _ _ _  _ _ _ _ _  
-Available Letters: D I K L M N S T U 
-
-1481288103648
-guessed: D
-           v                                
-1          2          3          4          
-A E G I R  D _ _ _ _  _ _ _ _ _  _ _ _ _ _  
-Available Letters: D I K L M N S T U 
-
+1482044955262
+_ _ _ _  _ _ _ _  _  _ _ _ _ _  
+new game begins

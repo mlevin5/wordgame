@@ -1,15 +1,18 @@
 package wordgame.gui;
 
-import java.awt.FlowLayout;
-import java.awt.event.*;
 import java.io.IOException;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+
 
 /** This is an hybrid application/applet.  It can be run
  * as either a JFrame or JApplet. */
 public class WordGameApp extends JApplet {
+
+    /**
+     * default serial version
+     */
+    private static final long serialVersionUID = 1L;
 
     /** Construct the GUI for an applet. */
     public void init() {

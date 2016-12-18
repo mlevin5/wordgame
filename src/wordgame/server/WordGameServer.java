@@ -36,7 +36,7 @@ public class WordGameServer {
     //   -private methods use confinement
 
     /** Default server port. */
-    private static final int DEFAULT_PORT = 4443;
+    //private static final int DEFAULT_PORT = 4443;
     /** Socket for receiving incoming connections. */
     private final ServerSocket serverSocket;
     /** Representation of the word game sentence. */
@@ -142,7 +142,6 @@ public class WordGameServer {
         } finally {
             out.close();
             in.close();
-            sentence.closeWriter();
             System.err.println("client "+players+" disconnected.");
             synchronized (players){
                 players--;
@@ -161,7 +160,7 @@ public class WordGameServer {
         String regex = "(back)|(help)|(bye)|(submit)|(guess [a-zA-Z]+)|(user [a-zA-Z]+)|(letter [a-zA-Z]+)";
         if ( ! input.matches(regex)) {
             // invalid input
-            // TODO what should i actually be printing here?
+            // what should i actually be printing here?
           /*  return "\nInvalid input. Make sure you're not typing a space after your guess\n"
                     + "or in your username. Type 'help' if you need the help instructions.\n"; */
             if (input.equals("")){
@@ -202,8 +201,8 @@ public class WordGameServer {
                 }
                 return sentence.toString();
             } else if(tokens[0].equals("user")){
-                String user = tokens[1];
-                sentence.startGame(user);
+                //String user = tokens[1];
+                // writer user to doc
                 return sentence.toString();
             } else if(tokens[0].equals("letter")){
                 String letter = tokens[1];
@@ -247,7 +246,7 @@ public class WordGameServer {
         s.add("hold the phone");
         Random r = new Random();
         int randIndex = r.nextInt(s.size());
-        Sentence newSentence = new Sentence(s.get(randIndex),"data.txt");
+        Sentence newSentence = new Sentence(s.get(randIndex));
         WordGameServer server = new WordGameServer(newSentence, port);
         server.serve();
     }
