@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import javax.swing.AbstractButton;
 import javax.swing.Timer;
@@ -47,6 +49,14 @@ public class WordGameGUI extends javax.swing.JFrame {
      * @throws IOException 
      */
     public WordGameGUI() throws IOException {
+        FileHandler fh;  
+        // This block configure the logger with handler and formatter  
+        fh = new FileHandler("MyLogFile.log");  
+        LOGGER.addHandler(fh);
+        SimpleFormatter formatter = new SimpleFormatter();  
+        fh.setFormatter(formatter);  
+
+        LOGGER.info("My first log"); 
         
         words.add(new Word("face","abcdefgh"));
         words.add(new Word("nope","ejklmnop"));
@@ -390,7 +400,7 @@ public class WordGameGUI extends javax.swing.JFrame {
         if(label.equals("Next!")){
             if(trainingDone){ 
                 System.out.println("score:"+score);
-                score+= 5; 
+                score += 5; 
             }
             scoreLabel.setText("score: "+Integer.toString(score));
             skipButton.setText("Skip");
