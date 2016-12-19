@@ -70,13 +70,8 @@ public class NewJFrame extends javax.swing.JFrame {
         buttons.add(jButton5);
         buttons.add(jButton6);
         
+        /// ayayyaa
         
-        initComponents();
-    }
-
-
-    private void initComponents() {
-
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText(sentence.toStringGUI());
@@ -159,6 +154,18 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("YOU WON!!!");
+        
+        // yayayyya
+        
+        
+        
+        initComponents();
+    }
+
+
+    private void initComponents() {
+
+       
 
 
 
