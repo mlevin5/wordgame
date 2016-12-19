@@ -58,6 +58,12 @@ public class WordGameGUI extends javax.swing.JFrame {
 
         LOGGER.info("My first log"); 
         
+        // useful info on using logger:
+        
+        // https://logging.apache.org/log4j/1.2/manual.html
+        
+        // https://www.loggly.com/ultimate-guide/parsing-java-logs/
+        
         words.add(new Word("face","abcdefgh"));
         words.add(new Word("nope","ejklmnop"));
         words.add(new Word("suck","suckyoet"));
