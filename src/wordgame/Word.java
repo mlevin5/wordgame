@@ -232,6 +232,16 @@ public class Word {
     public synchronized List<String> getAvailableLetters(){
         return new ArrayList<String>(availableLetters.get(wordToGuess()-1));
     } //6.035 , check out new classes
+    public synchronized boolean isSolvable(){
+        List<String> word= hiddenSentence.get(0);
+        for(String letter : word){
+            if(!availableLetters.get(0).contains(letter)){
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public synchronized List<String> getLettersOfCurrentWord(){
         int wordIndex = wordToGuess()-1;
         List<String> displayWord = displaySentence.get(wordIndex);
@@ -260,6 +270,7 @@ public class Word {
     public synchronized String getSentence(){
         return this.sentence;
     }
+
 // <font color="red">This is some text!</font> 
     public synchronized String toStringGUI(){
         String s = "<html><center>";

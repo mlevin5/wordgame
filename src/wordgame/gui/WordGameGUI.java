@@ -8,6 +8,7 @@ package wordgame.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import java.util.logging.XMLFormatter;
 
 import javax.swing.AbstractButton;
 import javax.swing.Timer;
@@ -32,11 +34,12 @@ public class WordGameGUI extends javax.swing.JFrame {
     private final static String DEFAULT_FILENAME = "data.xml";
     private final static int TRAINING_TRIALS = 3;
     private final static int MAX_TIME = 60;
-
+    private final static int PENALTY = 10;
+    private final static int REWARD = 5;
+    
     private int wordIndex = 0;
     private final List<javax.swing.JButton> buttons = Collections.synchronizedList(new ArrayList<javax.swing.JButton>());
     private final List<Word> words = Collections.synchronizedList(new ArrayList<Word>());
-    private final BufferedWriter writer;
     private Word word;
     private boolean trainingDone = false;
     private boolean realDone = false;
@@ -51,12 +54,23 @@ public class WordGameGUI extends javax.swing.JFrame {
     public WordGameGUI() throws IOException {
         FileHandler fh;  
         // This block configure the logger with handler and formatter  
-        fh = new FileHandler("MyLogFile.log");  
+        
+        String filename = "Data";
+        File f = new File(filename+".log");
+        int j = 1;
+        while(f.exists() && !f.isDirectory()){
+            filename += Integer.toString(j);
+            f = new File(filename+".log");
+            j++;
+        }
+        
+        fh = new FileHandler(filename+".log");
+        
         LOGGER.addHandler(fh);
-        SimpleFormatter formatter = new SimpleFormatter();  
+        XMLFormatter formatter = new XMLFormatter();//SimpleFormatter();  
         fh.setFormatter(formatter);  
 
-        LOGGER.info("My first log"); 
+        LOGGER.info("Started a new game"); 
         
         // useful info on using logger:
         
@@ -73,7 +87,7 @@ public class WordGameGUI extends javax.swing.JFrame {
         words.add(new Word("fuck","fuckyoet"));
         words.add(new Word("cane","caneyobt"));
         word = words.get(0);
-        this.writer = new BufferedWriter(new FileWriter(DEFAULT_FILENAME, true));
+
         
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -195,7 +209,7 @@ public class WordGameGUI extends javax.swing.JFrame {
 
         scoreLabel.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
         scoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        scoreLabel.setText("score: ");
+        scoreLabel.setText("score: 0");
 
         javax.swing.GroupLayout gamePanelLayout = new javax.swing.GroupLayout(gamePanel);
         gamePanel.setLayout(gamePanelLayout);
@@ -320,7 +334,7 @@ public class WordGameGUI extends javax.swing.JFrame {
     
     private void showStartReal() throws IOException{
         trainingDone = true;
-        
+        LOGGER.info("staring the real game");
         gamePanel.setVisible(false);
         startPrompt.setVisible(true);
         startButton.setVisible(true);
@@ -329,14 +343,23 @@ public class WordGameGUI extends javax.swing.JFrame {
         scoreLabel.setVisible(true);
     }
     private void showEndOfGame() throws IOException{
+        LOGGER.info("game ended");
         startPrompt.setText("<html><center>Out of Time!<br>Your final<br>score was: "+score+"</html>");
         startButton.setText("Exit");
         gamePanel.setVisible(false);
         startPrompt.setVisible(true);
         startButton.setVisible(true);
     }
+    private void showEndOfGameBeatTheTimer() throws IOException{
+        LOGGER.info("game ended");
+        startPrompt.setText("<html><center>You completed them all!<br>Your final<br>score was: "+score+"</html>");
+        startButton.setText("Exit");
+        gamePanel.setVisible(false);
+        startPrompt.setVisible(true);
+        startButton.setVisible(true);
+    }
     private void showWordGame() throws IOException{
-        //writer.write(System.currentTimeMillis()+"\n"+sentence.toStringSimple()+"\nnew game begins\n");
+        //writer.write(System.currentTimeMillis()+"\n"+sentence.toStringSimple()+"\nnew game begins\n"); 
         gamePanel.setVisible(true);
         startPrompt.setVisible(false);
         startButton.setVisible(false);
@@ -345,15 +368,18 @@ public class WordGameGUI extends javax.swing.JFrame {
         if(!trainingDone){
             // do the training data
             showWordGame();
+            LOGGER.info("Started a new word "+word.getSentence());
             startPrompt.setText("next is the real data");
             
         } else if(!realDone){
             // do the real data
             showWordGame();
             Timer.start();
+            LOGGER.info("Started a new word "+word.getSentence());
             realDone = true;
             
         }else{
+            LOGGER.info("finished game"); 
             System.exit(0);
         }
     }//GEN-LAST:event_startButtonActionPerformed
@@ -380,6 +406,7 @@ public class WordGameGUI extends javax.swing.JFrame {
                 for(javax.swing.JButton button : buttons){
                     if(button.getText().equals(" ")){
                         button.setText(removedLetter);
+                        LOGGER.info("removed letter "+removedLetter); 
                         break;
                     }
                 }
@@ -391,26 +418,44 @@ public class WordGameGUI extends javax.swing.JFrame {
         AbstractButton button = (AbstractButton) evt.getSource();
         String label = button.getText();
         wordIndex++;
-        word = words.get(wordIndex);
-        wordLabel.setText(word.toStringGUI());
-        List<String> availableLetters = word.getAvailableLetters();
-        for(int i=0; i<availableLetters.size(); i++){
-            buttons.get(i).setText(availableLetters.get(i));
+        
+        if(label.equals("Skip")){
+            if (word.isSolvable()){
+                LOGGER.info("skipped word "+word.getSentence()+" and was wrong");
+                if(trainingDone){score -= PENALTY;}       
+            }else{
+                LOGGER.info("skipped word "+word.getSentence()+" and was right");
+                if(trainingDone){score += REWARD;}
+                }
         }
-        if(wordIndex == TRAINING_TRIALS){
-            showStartReal();
-        } else if(wordIndex == words.size()){
-            showEndOfGame();
-        }   
-        // make sure this is just training data
         if(label.equals("Next!")){
             if(trainingDone){ 
-                System.out.println("score:"+score);
-                score += 5; 
+                score += REWARD; 
             }
-            scoreLabel.setText("score: "+Integer.toString(score));
             skipButton.setText("Skip");
         }
+        scoreLabel.setText("score: "+Integer.toString(score));
+        
+        if(wordIndex == words.size()){
+            showEndOfGameBeatTheTimer();
+        }else{
+            
+            word = words.get(wordIndex);
+            wordLabel.setText(word.toStringGUI());
+            List<String> availableLetters = word.getAvailableLetters();
+            for(int i=0; i<availableLetters.size(); i++){
+                buttons.get(i).setText(availableLetters.get(i));
+            }
+            if(wordIndex == TRAINING_TRIALS){
+                showStartReal();
+            } else if(wordIndex == words.size()){
+                showEndOfGame();
+            } else{
+                LOGGER.info("Started a new word "+word.getSentence());
+            }
+            // make sure this is just training data 
+        }
+
 
         
          
@@ -429,6 +474,7 @@ public class WordGameGUI extends javax.swing.JFrame {
            wordLabel.setText(word.toStringGUI());
            button.setText(" ");
            //writer.write(System.currentTimeMillis()+"\n"+word.toStringSimple()+"\nguessed letter: "+letter+"\n");
+           LOGGER.info("guessed letter "+letter);
            if(indic.equals("next word")){
   
                //writer.write("guessed word #"+(word.wordToGuess()-1)+": "+word.lastWordCheck()+"\n");
@@ -441,6 +487,7 @@ public class WordGameGUI extends javax.swing.JFrame {
         }
         if(word.full()){
             if(word.win()){
+                LOGGER.info("guessed word "+word.getSentence()+" and was right");
               //writer.write(System.currentTimeMillis()+"\n"+word.toStringSimple()+"WINNER!\n"); 
                 wordLabel.setText(word.toStringGUI("green"));
                 skipButton.setText("Next!");
@@ -449,6 +496,7 @@ public class WordGameGUI extends javax.swing.JFrame {
             }else{
                 //writer.write(System.currentTimeMillis()+"\n"+sentence.toStringSimple()+"\nLOSER!\n");
                 wordLabel.setText(word.toStringGUI("red"));
+                LOGGER.info("guessed word "+word.getSentence()+" and was wrong");
                 /*word.goBackAWord();
                 List<String> availableLetters = word.getAvailableLetters();
                 for(int i=0; i<availableLetters.size(); i++){
