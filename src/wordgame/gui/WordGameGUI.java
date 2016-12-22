@@ -7,16 +7,13 @@ package wordgame.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 import java.util.logging.XMLFormatter;
 
 import javax.swing.AbstractButton;
@@ -32,12 +29,13 @@ public class WordGameGUI extends javax.swing.JFrame {
     
     private final static Logger LOGGER = Logger.getLogger(WordGameGUI.class.getName());
     private final static int TRAINING_TRIALS = 10;
-    private final static int TESTING_TRIALS = 10;
+
     private final static int MAX_TIME = 60;
     //private final static int PENALTY = 10;
     //private final static int REWARD = 5;
-    private final static String SKIP = "<html><font size = \"1\"><center>Unsolvable <br>(80% Sure)</html>";
-    private final static String BACK = "<html><font size = \"1\"><center>Go Back <br>A Letter</html>";
+    private final static String TRAINING_SKIP = "<html><center>Skip<br>This Word</html>";
+    private final static String SKIP = "<html><center>Mark As Unsolvable <br>(80% Sure)</html>";
+    private final static String BACK = "<html><center>Go Back <br>A Letter</html>";
     
     private final static String TRAINING_DATA_LOG = "starting training data";
     private final static String TESTING_DATA_LOG = "starting testing data";
@@ -84,14 +82,15 @@ public class WordGameGUI extends javax.swing.JFrame {
         // This block configure the logger with handler and formatter  
         
         String filename = "DataLog";
-        File f = new File(filename+".log");
         int j = 1;
-        while(f.exists() && !f.isDirectory()){
+        File f = new File(filename+Integer.toString(j)+".log");
+        while(f.exists()){
             j++;
             f = new File(filename+Integer.toString(j)+".log");
+            System.out.println(f);
             
         }
-        
+
         fh = new FileHandler(filename+Integer.toString(j)+".log");
         
         LOGGER.addHandler(fh);
@@ -231,7 +230,7 @@ public class WordGameGUI extends javax.swing.JFrame {
             }
         });
 
-        skipButton.setText(SKIP);
+        skipButton.setText(TRAINING_SKIP);
       //  skipButton.setFont(new java.awt.Font("Comic Sans MS", 0, 5));
         skipButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -277,63 +276,57 @@ public class WordGameGUI extends javax.swing.JFrame {
             .addGroup(gamePanelLayout.createSequentialGroup()
                 .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(gamePanelLayout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(gamePanelLayout.createSequentialGroup()
-                                .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(gamePanelLayout.createSequentialGroup()
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(gamePanelLayout.createSequentialGroup()
-                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(gamePanelLayout.createSequentialGroup()
-                                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(skipButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(gamePanelLayout.createSequentialGroup()
                         .addComponent(timerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scoreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(scoreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(gamePanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(skipButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(gamePanelLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(gamePanelLayout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(gamePanelLayout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         gamePanelLayout.setVerticalGroup(
             gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gamePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(timerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(timerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(wordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(wordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
                 .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(skipButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                    .addComponent(skipButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         interludePanel.setLayer(startButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -383,6 +376,7 @@ public class WordGameGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(interludePanel)
         );
+
         gamePanel.setVisible(false);
         timerLabel.setVisible(false);
         scoreLabel.setVisible(false);
@@ -392,6 +386,7 @@ public class WordGameGUI extends javax.swing.JFrame {
     
     private void showStartReal() throws IOException{
         trainingDone = true;
+        skipButton.setText(SKIP);
         LOGGER.info(TESTING_DATA_LOG);
         gamePanel.setVisible(false);
         startPrompt.setVisible(true);
@@ -408,7 +403,7 @@ public class WordGameGUI extends javax.swing.JFrame {
         startButton.setVisible(true);
     }
     private void showEndOfGameBeatTheTimer() throws IOException{
-        startPrompt.setText("<html><center>You completed them all!<br>Your final<br>score was: "+score+"</html>");
+        startPrompt.setText("<html><center>You finished the word game!<br>Thanks!</html>");
         startButton.setText("Exit");
         gamePanel.setVisible(false);
         startPrompt.setVisible(true);
@@ -426,11 +421,10 @@ public class WordGameGUI extends javax.swing.JFrame {
             showWordGame();
             LOGGER.info(NEW_TRAINING_WORD_LOG);
             
-            startPrompt.setText("<html><center>For the next part, <br>"
+            startPrompt.setText("<html><center>For the next part of the game, <br>"
                     + "50% of the puzzles will have a solution, <br>"
-                    + "and 50% will not. When you're 80% sure <br>"
-                    + ""
-                    + "there's no solution, click the skip button <br>"
+                    + "and 50% will not. When you're 80% sure that <br>"
+                    + "there's no solution, click the 'Mark As Unsolvable' <br>"
                     + "to move onto the next puzzle.<br></html>");
             
         } else if(!realDone){
@@ -493,7 +487,7 @@ public class WordGameGUI extends javax.swing.JFrame {
             }else{
                 
                 if(trainingDone){
-                    LOGGER.info(SKIP_TRAINING_RIGHT_LOG);
+                    LOGGER.info(SKIP_TESTING_RIGHT_LOG);
                     //score += REWARD;
                 }else{
                     LOGGER.info(SKIP_TRAINING_RIGHT_LOG);
@@ -558,7 +552,7 @@ public class WordGameGUI extends javax.swing.JFrame {
            } 
 
         }
-        if(word.full()){
+        if(word.full() && !wordLabel.getText().equals(word.toStringGUI("green")) && !wordLabel.getText().equals(word.toStringGUI("red"))){
             if(word.win()){
                 LOGGER.info(RIGHT_WORD_LOG);
               //writer.write(System.currentTimeMillis()+"\n"+word.toStringSimple()+"WINNER!\n"); 
