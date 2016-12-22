@@ -115,31 +115,26 @@ public class WordGameGUI extends javax.swing.JFrame {
         words.add(new Word("fuck","fuckyoet"));
         words.add(new Word("cane","caneyobt")); */
         
-        // training data
-        words.add(new Word("file","wfijklwx"));
-        words.add(new Word("post","dfjopstz"));
-        words.add(new Word("grow","ghloprwy"));
-        words.add(new Word("cord","cdjkoqru"));
-        words.add(new Word("mold","cdkklmot"));
+        // test 5 words
+        words.add(new Word("shot","hostux"));
+        words.add(new Word("dice","cdeiss"));
+        words.add(new Word("soft","afkost"));
+
+	// test 7 words
         
-        words.add(new Word("poor","nooprruy"));
-        words.add(new Word("pipe","cdeilppy"));
-        words.add(new Word("null","fjllnouy"));
-        words.add(new Word("menu","eeghmnuv"));
-        words.add(new Word("dash","adhkkssw"));
+        words.add(new Word("rent","aenrtu"));
+        words.add(new Word("this","bhipst"));
+        words.add(new Word("rock","ckmopr"));
+	
+	// test 3 words
         
-        // testing data
-        words.add(new Word("lazy","acklnvyz"));
-        words.add(new Word("risk","ikmorrsw"));
-        words.add(new Word("****","abcklopq"));
-        words.add(new Word("****","chmoqrst"));
-        words.add(new Word("doom","adjmoorr"));
-        
-        words.add(new Word("****","abkoottw"));
-        words.add(new Word("fast","abfjkmst"));
-        words.add(new Word("****","deflnntx"));
-        words.add(new Word("****","belqstty"));
-        words.add(new Word("tube","abbbeptu"));
+        words.add(new Word("frog","efgopr"));
+        words.add(new Word("send","dehnrs"));
+        words.add(new Word("copy","cklopy"));
+
+ 
+
+	
 
         
         
