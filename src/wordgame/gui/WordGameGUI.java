@@ -28,7 +28,7 @@ import wordgame.Word;
 public class WordGameGUI extends javax.swing.JFrame {
     
     private final static Logger LOGGER = Logger.getLogger(WordGameGUI.class.getName());
-    private final static int TRAINING_TRIALS = 10;
+    private final static int TRAINING_TRIALS = 6;
 
     private final static int MAX_TIME = 60;
     //private final static int PENALTY = 10;
@@ -119,17 +119,17 @@ public class WordGameGUI extends javax.swing.JFrame {
         words.add(new Word("dice","cdeiss"));
         words.add(new Word("soft","afkost"));
 
-	// test 7 words
         
-        words.add(new Word("rent","aenrtu"));
-        words.add(new Word("this","bhipst"));
-        words.add(new Word("rock","ckmopr"));
+        
+        words.add(new Word("wave","aemtvw"));
+        words.add(new Word("toys","opqsty"));
+        words.add(new Word("clay","aclnoy"));
+        words.add(new Word("area","aaerrt"));
+        words.add(new Word("flag","afglou"));
+        
+        
+        
 	
-	// test 3 words
-        
-        words.add(new Word("frog","efgopr"));
-        words.add(new Word("send","dehnrs"));
-        words.add(new Word("copy","cklopy"));
 
  
 
