@@ -117,22 +117,13 @@ public class WordGameGUI extends javax.swing.JFrame {
         // test 5 words
         words.add(new Word("shot","hostux"));
         words.add(new Word("dice","cdeiss"));
-        words.add(new Word("soft","afkost"));
+        words.add(new Word("fast","afkost"));    	words.add(new Word("film","fiklms"));
+        words.add(new Word("seek","ceekns"));
 
-	// test 7 words
-        
-        words.add(new Word("rent","aenrtu"));
-        words.add(new Word("this","bhipst"));
-        words.add(new Word("rock","ckmopr"));
-	
-	// test 3 words
-        
-        words.add(new Word("frog","efgopr"));
-        words.add(new Word("send","dehnrs"));
-        words.add(new Word("copy","cklopy"));
-
- 
-
+        words.add(new Word("weak","aekttw"));    	words.add(new Word("cute","aceltu"));
+        words.add(new Word("rent","beinrt"));
+        words.add(new Word("hope","cdehop"));
+	words.add(new Word("best","beiist"));
 	
 
         
