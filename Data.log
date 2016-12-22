@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2016-12-21T22:39:20</date>
+  <millis>1482377960357</millis>
+  <sequence>0</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>&lt;init&gt;</method>
+  <thread>14</thread>
+  <message>Started a new game</message>
+</record>
+<record>
+  <date>2016-12-21T22:39:23</date>
+  <millis>1482377963694</millis>
+  <sequence>1</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>startButtonActionPerformed</method>
+  <thread>14</thread>
+  <message>Started a new word</message>
+</record>
+<record>
+  <date>2016-12-21T22:39:27</date>
+  <millis>1482377967413</millis>
+  <sequence>2</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>buttonActionPerformed</method>
+  <thread>14</thread>
+  <message>guessed word and was right</message>
+</record>
+<record>
+  <date>2016-12-21T22:39:28</date>
+  <millis>1482377968849</millis>
+  <sequence>3</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>skipButtonActionPerformed</method>
+  <thread>14</thread>
+  <message>Started a new word</message>
+</record>
+<record>
+  <date>2016-12-21T22:39:34</date>
+  <millis>1482377974207</millis>
+  <sequence>4</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>skipButtonActionPerformed</method>
+  <thread>14</thread>
+  <message>skipped word and was wrong</message>
+</record>
+<record>
+  <date>2016-12-21T22:39:34</date>
+  <millis>1482377974208</millis>
+  <sequence>5</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>skipButtonActionPerformed</method>
+  <thread>14</thread>
+  <message>Started a new word</message>
+</record>
+<record>
+  <date>2016-12-21T22:39:38</date>
+  <millis>1482377978076</millis>
+  <sequence>6</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>buttonActionPerformed</method>
+  <thread>14</thread>
+  <message>guessed word and was right</message>
+</record>
+<record>
+  <date>2016-12-21T22:39:53</date>
+  <millis>1482377993367</millis>
+  <sequence>7</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>showStartReal</method>
+  <thread>14</thread>
+  <message>staring the real game</message>
+</record>
+<record>
+  <date>2016-12-21T22:39:54</date>
+  <millis>1482377994449</millis>
+  <sequence>8</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>startButtonActionPerformed</method>
+  <thread>14</thread>
+  <message>Started a new word</message>
+</record>
+<record>
+  <date>2016-12-21T22:39:57</date>
+  <millis>1482377997000</millis>
+  <sequence>9</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>buttonActionPerformed</method>
+  <thread>14</thread>
+  <message>guessed word and was right</message>
+</record>
+<record>
+  <date>2016-12-21T22:39:57</date>
+  <millis>1482377997532</millis>
+  <sequence>10</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>skipButtonActionPerformed</method>
+  <thread>14</thread>
+  <message>Started a new word</message>
+</record>
+<record>
+  <date>2016-12-21T22:40:00</date>
+  <millis>1482378000642</millis>
+  <sequence>11</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>buttonActionPerformed</method>
+  <thread>14</thread>
+  <message>guessed word and was wrong</message>
+</record>
+<record>
+  <date>2016-12-21T22:40:01</date>
+  <millis>1482378001944</millis>
+  <sequence>12</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>skipButtonActionPerformed</method>
+  <thread>14</thread>
+  <message>skipped word and was wrong</message>
+</record>
+<record>
+  <date>2016-12-21T22:40:01</date>
+  <millis>1482378001947</millis>
+  <sequence>13</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>skipButtonActionPerformed</method>
+  <thread>14</thread>
+  <message>Started a new word</message>
+</record>
+<record>
+  <date>2016-12-21T22:40:06</date>
+  <millis>1482378006060</millis>
+  <sequence>14</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>buttonActionPerformed</method>
+  <thread>14</thread>
+  <message>guessed word and was wrong</message>
+</record>
+<record>
+  <date>2016-12-21T22:40:06</date>
+  <millis>1482378006755</millis>
+  <sequence>15</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>skipButtonActionPerformed</method>
+  <thread>14</thread>
+  <message>skipped word and was wrong</message>
+</record>
+<record>
+  <date>2016-12-21T22:40:06</date>
+  <millis>1482378006757</millis>
+  <sequence>16</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>skipButtonActionPerformed</method>
+  <thread>14</thread>
+  <message>Started a new word</message>
+</record>
+<record>
+  <date>2016-12-21T22:40:11</date>
+  <millis>1482378011121</millis>
+  <sequence>17</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>buttonActionPerformed</method>
+  <thread>14</thread>
+  <message>guessed word and was right</message>
+</record>
+<record>
+  <date>2016-12-21T22:40:11</date>
+  <millis>1482378011824</millis>
+  <sequence>18</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>skipButtonActionPerformed</method>
+  <thread>14</thread>
+  <message>Started a new word</message>
+</record>
+<record>
+  <date>2016-12-21T22:40:14</date>
+  <millis>1482378014627</millis>
+  <sequence>19</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>buttonActionPerformed</method>
+  <thread>14</thread>
+  <message>guessed word and was wrong</message>
+</record>
+<record>
+  <date>2016-12-21T22:40:15</date>
+  <millis>1482378015181</millis>
+  <sequence>20</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>skipButtonActionPerformed</method>
+  <thread>14</thread>
+  <message>skipped word and was wrong</message>
+</record>
+<record>
+  <date>2016-12-21T22:40:19</date>
+  <millis>1482378019266</millis>
+  <sequence>21</sequence>
+  <logger>wordgame.gui.WordGameGUI</logger>
+  <level>INFO</level>
+  <class>wordgame.gui.WordGameGUI</class>
+  <method>startButtonActionPerformed</method>
+  <thread>14</thread>
+  <message>finished game</message>
+</record>
+</log>
