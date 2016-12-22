@@ -20,7 +20,7 @@ import wordgame.Sentence;
  *
  * @author mango
  */
-public class NewJFrame extends javax.swing.JFrame {
+public class SentenceGameGUI extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,9 +32,9 @@ public class NewJFrame extends javax.swing.JFrame {
     private final BufferedWriter writer;
     private Sentence sentence;
     /**
-     * Creates new form NewJFrame
+     * Creates new form SentenceGameGUI
      */
-    public NewJFrame()throws IOException{
+    public SentenceGameGUI()throws IOException{
         this.writer = new BufferedWriter(new FileWriter(DEFAULT_FILENAME, true));
         List<String> phrases = new ArrayList<String>();
         phrases.add("breath of fresh air");
@@ -386,13 +386,13 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SentenceGameGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SentenceGameGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SentenceGameGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SentenceGameGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
 
@@ -400,7 +400,7 @@ public class NewJFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new NewJFrame().setVisible(true);
+                    new SentenceGameGUI().setVisible(true);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

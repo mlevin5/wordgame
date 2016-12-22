@@ -7,7 +7,7 @@ import javax.swing.*;
 
 /** This is an hybrid application/applet.  It can be run
  * as either a JFrame or JApplet. */
-public class WordGameApp extends JApplet {
+public class SentenceGameApplet extends JApplet {
 
     /**
      * default serial version
@@ -19,9 +19,9 @@ public class WordGameApp extends JApplet {
         try {
             SwingUtilities.invokeAndWait( new Runnable() {
                 public void run() {
-                    NewJFrame gui;
+                    SentenceGameGUI gui;
                     try {
-                        gui = new NewJFrame();
+                        gui = new SentenceGameGUI();
                         setContentPane(gui.getPanel());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -34,13 +34,13 @@ public class WordGameApp extends JApplet {
     }
 
     /** Launch the GUI in a frame. */
-  /*  public static void main(String[] args) {
+   public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable(){
             @Override 
             public void run() {
-                NewJFrame gui;
+                SentenceGameGUI gui;
                 try {
-                    gui = new NewJFrame();
+                    gui = new SentenceGameGUI();
                     gui.pack();
                     gui.setLocationByPlatform(true);
                     gui.setVisible(true);
@@ -49,5 +49,5 @@ public class WordGameApp extends JApplet {
                 }
             }
         });
-    }*/
+    }
 }

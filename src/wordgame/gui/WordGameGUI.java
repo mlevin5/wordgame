@@ -28,7 +28,7 @@ import wordgame.Word;
 public class WordGameGUI extends javax.swing.JFrame {
     
     private final static Logger LOGGER = Logger.getLogger(WordGameGUI.class.getName());
-    private final static int TRAINING_TRIALS = 6;
+    private final static int TRAINING_TRIALS = 10;
 
     private final static int MAX_TIME = 60;
     //private final static int PENALTY = 10;
@@ -118,21 +118,26 @@ public class WordGameGUI extends javax.swing.JFrame {
         words.add(new Word("shot","hostux"));
         words.add(new Word("dice","cdeiss"));
         words.add(new Word("soft","afkost"));
-
+        words.add(new Word("meat","aemtvw"));
+        words.add(new Word("stop","opqsty"));
         
-        
-        words.add(new Word("wave","aemtvw"));
-        words.add(new Word("toys","opqsty"));
-        words.add(new Word("clay","aclnoy"));
-        words.add(new Word("area","aaerrt"));
+        words.add(new Word("loan","aclnoy"));
+        words.add(new Word("rate","aaerrt"));
         words.add(new Word("flag","afglou"));
+        words.add(new Word("fast","afkost"));    	
+        words.add(new Word("film","fiklms"));
         
+        words.add(new Word("seek","ceekns"));
+        words.add(new Word("****","aekttw"));    	
+        words.add(new Word("****","aceltu"));
+        words.add(new Word("rent","beinrt"));
+        words.add(new Word("****","cdehop"));
         
-        
-	
-
- 
-
+        words.add(new Word("****","beiist"));
+        words.add(new Word("wood","dloopw"));
+        words.add(new Word("vote","emostv"));
+        words.add(new Word("****","afhimr"));
+        words.add(new Word("drag","acdgor"));
 	
 
         
@@ -497,8 +502,11 @@ public class WordGameGUI extends javax.swing.JFrame {
         if(label.equals("Next!")){
             if(trainingDone){ 
                 //score += REWARD; 
+                skipButton.setText(SKIP);
+            }else{
+                skipButton.setText(TRAINING_SKIP);
             }
-            skipButton.setText(SKIP);
+            
         }
         //scoreLabel.setText("score: "+Integer.toString(score));
         
